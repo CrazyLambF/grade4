@@ -1,0 +1,45 @@
+// 主题色
+$color-primary: #4E8AF2;
+$color-chinese: #F5A623;
+$color-math: #4E8AF2;
+$color-english: #7ED321;
+$color-science: #BD10E0;
+
+// 状态色
+$color-success: #52C41A;
+$color-warning: #FAAD14;
+$color-error: #FF4D4F;
+
+// 背景色
+$color-bg: #F5F7FA;
+$color-card: #FFFFFF;
+$color-border: #EBEDF0;
+
+// 文字色
+$color-text-primary: #323233;
+$color-text-regular: #646566;
+$color-text-secondary: #969799;
+$color-text-placeholder: #C8C9CC;
+
+// 字号
+$font-size-lg: 22px;
+$font-size-md: 18px;
+$font-size-base: 16px;
+$font-size-sm: 14px;
+$font-size-xs: 12px;
+
+// 圆角
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
+
+// 间距
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+
+// 安全区域
+$safe-top: env(safe-area-inset-top);
+$safe-bottom: env(safe-area-inset-bottom);

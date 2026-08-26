@@ -1,0 +1,30 @@
+{
+  "name": "sxsxxb",
+  "version": "1.0.0",
+  "description": "杭州小学四年级上学习帮 H5应用",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.4.0",
+    "vue-router": "^4.3.0",
+    "pinia": "^2.1.0",
+    "vant": "^4.8.0",
+    "dexie": "^4.0.0",
+    "echarts": "^5.5.0",
+    "vue-echarts": "^7.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.0",
+    "vite": "^5.4.0",
+    "typescript": "^5.4.0",
+    "vue-tsc": "^2.0.0",
+    "sass": "^1.77.0",
+    "postcss-px-to-viewport": "^1.1.1",
+    "@vant/use": "^1.6.0",
+    "vite-plugin-pwa": "^0.20.0"
+  }
+}

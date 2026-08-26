@@ -1,0 +1,122 @@
+@import './variables.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  background-color: $color-bg;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#app {
+  width: 100%;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+// 通用页面容器
+.page-container {
+  min-height: 100vh;
+  padding-bottom: calc(50px + #{$safe-bottom});
+  background-color: $color-bg;
+}
+
+// 通用卡片
+.card {
+  background: $color-card;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  margin: $spacing-sm $spacing-md;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+// 学科标签
+.subject-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: $font-size-xs;
+  color: #fff;
+
+  &--chinese { background: $color-chinese; }
+  &--math { background: $color-math; }
+  &--english { background: $color-english; }
+  &--science { background: $color-science; }
+}
+
+// 难度标签
+.difficulty-tag {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: $font-size-xs;
+
+  &--easy { background: #E8F5E9; color: #2E7D32; }
+  &--medium { background: #FFF3E0; color: #E65100; }
+  &--hard { background: #FFEBEE; color: #C62828; }
+}
+
+// 页面标题
+.page-title {
+  font-size: $font-size-lg;
+  font-weight: 700;
+  color: $color-text-primary;
+  padding: $spacing-md;
+}
+
+// 渐变背景
+.gradient-primary {
+  background: linear-gradient(135deg, $color-primary 0%, #6BA6FF 100%);
+}
+
+// 文字省略
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-ellipsis-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// 页面淡入动画
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.25s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+// 滑动动画
+.slide-enter-active {
+  transition: all 0.3s ease;
+}
+.slide-enter-from {
+  transform: translateX(100%);
+}
