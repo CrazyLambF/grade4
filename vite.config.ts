@@ -5,6 +5,7 @@ import postcsspxtoviewport from 'postcss-px-to-viewport'
 import path from 'path'
 
 export default defineConfig({
+  base: '/grade4/',
   plugins: [
     vue(),
     VitePWA({
