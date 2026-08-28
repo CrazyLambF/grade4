@@ -1,90 +1,153 @@
 <template>
   <div class="page-container home">
-    <!-- 顶部问候 -->
-    <div class="header gradient-primary">
+    <!-- 顶部卡通问候区 -->
+    <div class="hero-header">
+      <!-- 装饰气泡 -->
+      <div class="bubble-dot bubble-dot--1"></div>
+      <div class="bubble-dot bubble-dot--2"></div>
+      <div class="bubble-dot bubble-dot--3"></div>
+      <!-- 飘浮的小星星 -->
+      <div class="floating-star s1">⭐</div>
+      <div class="floating-star s2">✨</div>
+
       <div class="header-top">
         <div class="greeting">
-          <p class="greeting-text">{{ greetingText }}，{{ userName }}</p>
-          <p class="sub-text">今天是 {{ todayDate }}</p>
+          <p class="greeting-emoji">{{ greetingEmoji }}</p>
+          <p class="greeting-text">{{ greetingText }}，{{ userName }}！</p>
+          <p class="sub-text">📅 {{ todayDate }}</p>
         </div>
-        <div class="streak-badge">
-          <van-icon name="fire-o" size="20" color="#FFD700" />
-          <span>{{ streakDays }}天</span>
+        <div class="streak-badge anim-float">
+          <span class="flame">🔥</span>
+          <div class="streak-info">
+            <span class="streak-num">{{ streakDays }}</span>
+            <span class="streak-unit">天</span>
+          </div>
         </div>
       </div>
-      <!-- 学习进度概览 -->
+
+      <!-- 学科进度卡片 -->
       <div class="progress-overview">
-        <div v-for="s in subjects" :key="s.type" class="progress-item" @click="goSubject(s.type)">
-          <div class="progress-icon" :style="{ background: s.color }">
-            <van-icon :name="s.icon" size="22" color="#fff" />
+        <div
+          v-for="s in subjects"
+          :key="s.type"
+          class="progress-item"
+          @click="goSubject(s.type)"
+        >
+          <div class="progress-icon-wrap" :style="{ background: s.bgColor }">
+            <van-icon :name="s.icon" size="22" :color="s.color" />
           </div>
-          <span class="progress-name">{{ s.name }}</span>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar" :style="{ width: getProgress(s.type) + '%', background: s.color }"></div>
+          <div class="progress-detail">
+            <div class="progress-top-row">
+              <span class="progress-name">{{ s.name }}</span>
+              <span class="progress-text">{{ currentUnit(s.type) }}/{{ s.units.length }}</span>
+            </div>
+            <div class="progress-bar-wrap">
+              <div
+                class="progress-bar"
+                :style="{ width: getProgress(s.type) + '%', background: s.color }"
+              ></div>
+            </div>
           </div>
-          <span class="progress-text">{{ currentUnit(s.type) }}/{{ s.units.length }}单元</span>
         </div>
       </div>
     </div>
 
     <!-- 今日学习任务 -->
-    <div class="card today-task">
+    <div class="card today-task-card">
       <div class="card-header">
-        <van-icon name="clock-o" size="18" :color="primaryColor" />
+        <div class="card-icon-wrap gradient-sunny">
+          <span>📋</span>
+        </div>
         <span class="card-title">今日学习任务</span>
+        <span class="task-count" v-if="todayTasks.length > 0">{{ todayTasks.length }}项</span>
       </div>
       <div v-if="todayTasks.length > 0" class="task-list">
-        <div v-for="(task, i) in todayTasks" :key="i" class="task-item" @click="goTask(task)">
-          <div class="task-icon" :style="{ background: subjectColor(task.subject) }">
-            <van-icon :name="subjectIcon(task.subject)" size="16" color="#fff" />
+        <div
+          v-for="(task, i) in todayTasks"
+          :key="i"
+          class="task-item"
+          :style="{ animationDelay: i * 0.1 + 's' }"
+          @click="goTask(task)"
+        >
+          <div class="task-icon" :style="{ background: subjectColor(task.subject) + '20' }">
+            <van-icon :name="subjectIcon(task.subject)" size="18" :color="subjectColor(task.subject)" />
           </div>
           <div class="task-info">
             <p class="task-name">{{ task.name }}</p>
             <p class="task-desc">{{ task.desc }}</p>
           </div>
-          <van-icon name="arrow" size="14" color="#969799" />
+          <div class="task-arrow">→</div>
         </div>
       </div>
-      <van-empty v-else description="今天暂无任务，去预习吧！" :image-size="60" />
+      <div v-else class="empty-task">
+        <span class="empty-emoji">🎉</span>
+        <p>今天暂无任务，去预习吧！</p>
+      </div>
     </div>
 
     <!-- 快捷入口 -->
-    <div class="card quick-entry">
+    <div class="card quick-entry-card">
       <div class="card-header">
-        <van-icon name="apps-o" size="18" :color="primaryColor" />
+        <div class="card-icon-wrap gradient-primary">
+          <span>🚀</span>
+        </div>
         <span class="card-title">快捷入口</span>
       </div>
       <div class="entry-grid">
         <div class="entry-item" @click="$router.push('/subject/chinese')">
-          <div class="entry-icon" style="background: #FFF8EC"><van-icon name="edit" size="24" color="#F5A623" /></div>
+          <div class="entry-icon" style="background: #FFF5EE">
+            <span class="entry-emoji">📖</span>
+          </div>
           <span>课前预习</span>
         </div>
         <div class="entry-item" @click="$router.push('/subject/math')">
-          <div class="entry-icon" style="background: #EBF3FF"><van-icon name="replay" size="24" color="#4E8AF2" /></div>
+          <div class="entry-icon" style="background: #EBF3FF">
+            <span class="entry-emoji">📝</span>
+          </div>
           <span>课后复习</span>
         </div>
+        <div class="entry-item" @click="$router.push('/recitation')">
+          <div class="entry-icon" style="background: #FFF5EE">
+            <span class="entry-emoji">🎤</span>
+          </div>
+          <span>语文背诵</span>
+        </div>
+        <div class="entry-item" @click="$router.push('/daily-calc')">
+          <div class="entry-icon" style="background: #EBF3FF">
+            <span class="entry-emoji">🧮</span>
+          </div>
+          <span>每日计算</span>
+        </div>
+        <div class="entry-item" @click="$router.push('/daily-words')">
+          <div class="entry-icon" style="background: #E8F8F6">
+            <span class="entry-emoji">🔤</span>
+          </div>
+          <span>每日词汇</span>
+        </div>
         <div class="entry-item" @click="$router.push('/weekly')">
-          <div class="entry-icon" style="background: #FFF0F0"><van-icon name="edit" size="24" color="#FF4D4F" /></div>
+          <div class="entry-icon" style="background: #FFE5E5">
+            <span class="entry-emoji">✏️</span>
+          </div>
           <span>周周练</span>
         </div>
         <div class="entry-item" @click="$router.push('/monthly')">
-          <div class="entry-icon" style="background: #F0FBEB"><van-icon name="records" size="24" color="#7ED321" /></div>
+          <div class="entry-icon" style="background: #E8F8F6">
+            <span class="entry-emoji">🏆</span>
+          </div>
           <span>月月练</span>
         </div>
         <div class="entry-item" @click="$router.push('/games')">
-          <div class="entry-icon" style="background: #F8F0FB"><van-icon name="game-o" size="24" color="#BD10E0" /></div>
+          <div class="entry-icon" style="background: #FDF0F7">
+            <span class="entry-emoji">🎮</span>
+          </div>
           <span>放松游戏</span>
-        </div>
-        <div class="entry-item" @click="$router.push('/statistics')">
-          <div class="entry-icon" style="background: #FFF8EC"><van-icon name="chart-trending-o" size="24" color="#F5A623" /></div>
-          <span>学习统计</span>
         </div>
       </div>
     </div>
 
     <!-- 每日一言 -->
-    <div class="card daily-quote">
-      <van-icon name="comment-o" size="16" color="#969799" />
+    <div class="card daily-quote-card">
+      <div class="quote-deco">💬</div>
       <p class="quote-text">{{ dailyQuote }}</p>
     </div>
   </div>
@@ -101,7 +164,6 @@ const router = useRouter()
 const userStore = useUserStore()
 const subjectStore = useSubjectStore()
 
-const primaryColor = '#4E8AF2'
 const userName = computed(() => userStore.userInfo?.name || '同学')
 const streakDays = computed(() => userStore.userInfo?.streakDays || 0)
 
@@ -115,6 +177,16 @@ const greetingText = computed(() => {
   if (h < 14) return '中午好'
   if (h < 18) return '下午好'
   return '晚上好'
+})
+
+const greetingEmoji = computed(() => {
+  const h = new Date().getHours()
+  if (h < 6) return '🌙'
+  if (h < 9) return '☀️'
+  if (h < 12) return '🌤️'
+  if (h < 14) return '🌞'
+  if (h < 18) return '🌤️'
+  return '🌟'
 })
 
 const todayDate = computed(() => {
@@ -167,86 +239,288 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-.home { padding-bottom: calc(60px + #{$safe-bottom}); }
+.home { padding-bottom: calc(#{$tabbar-height} + #{$safe-bottom} + 12px); }
 
-.header {
-  padding: 60px 16px 16px;
-  border-radius: 0 0 20px 20px;
+// ============================================
+// 顶部 Hero 区域
+// ============================================
+.hero-header {
+  position: relative;
+  overflow: hidden;
+  padding: calc(56px + #{$safe-top}) $spacing-base $spacing-lg;
+  border-radius: 0 0 $radius-xl $radius-xl;
+  background: $gradient-primary;
   color: #fff;
 }
+
+.floating-star {
+  position: absolute;
+  font-size: 16px;
+  animation: float 3s ease-in-out infinite;
+  pointer-events: none;
+  &.s1 { top: 16px; right: 24px; animation-delay: 0s; }
+  &.s2 { top: 50px; right: 60px; font-size: 12px; animation-delay: 1.5s; }
+}
+
 .header-top {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
+  align-items: flex-start;
+  margin-bottom: $spacing-lg;
+  position: relative;
+  z-index: 1;
 }
-.greeting-text { font-size: 20px; font-weight: 700; }
-.sub-text { font-size: 13px; opacity: 0.85; margin-top: 4px; }
+
+.greeting-emoji {
+  font-size: 32px;
+  margin-bottom: 2px;
+}
+.greeting-text {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.sub-text {
+  font-size: $font-size-sm;
+  opacity: 0.9;
+  margin-top: 4px;
+}
+
 .streak-badge {
-  display: flex; align-items: center; gap: 4px;
-  background: rgba(255,255,255,0.2);
-  padding: 6px 12px; border-radius: 20px;
-  font-size: 14px; font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  padding: 8px 14px;
+  border-radius: $radius-pill;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+
+  .flame { font-size: 18px; }
+  .streak-info { display: flex; align-items: baseline; gap: 2px; }
+  .streak-num { font-size: $font-size-lg; font-weight: $font-weight-bold; }
+  .streak-unit { font-size: $font-size-xs; opacity: 0.9; }
 }
 
+// ============================================
+// 学科进度概览
+// ============================================
 .progress-overview {
-  background: rgba(255,255,255,0.15);
-  border-radius: 12px;
-  padding: 12px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: $radius-lg;
+  padding: $spacing-base;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
-.progress-item { display: flex; flex-direction: column; gap: 6px; }
-.progress-icon {
-  width: 32px; height: 32px; border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
+
+.progress-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  cursor: pointer;
+  transition: transform $duration-base $easing-bounce;
+
+  &:active { transform: scale(0.97); }
 }
-.progress-name { font-size: 13px; }
+
+.progress-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-md;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.progress-detail { flex: 1; }
+
+.progress-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.progress-name {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.progress-text {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+}
+
 .progress-bar-wrap {
-  height: 4px; background: rgba(255,255,255,0.3);
-  border-radius: 2px; overflow: hidden;
+  height: 8px;
+  background: $color-bg-alt;
+  border-radius: $radius-pill;
+  overflow: hidden;
 }
-.progress-bar { height: 100%; border-radius: 2px; transition: width 0.3s; }
-.progress-text { font-size: 11px; opacity: 0.8; }
 
+.progress-bar {
+  height: 100%;
+  border-radius: $radius-pill;
+  transition: width 0.5s $easing-smooth;
+}
+
+// ============================================
+// 卡片通用
+// ============================================
 .card-header {
-  display: flex; align-items: center; gap: 6px; margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-md;
 }
-.card-title { font-size: 16px; font-weight: 600; color: $color-text-primary; }
 
-.task-list { display: flex; flex-direction: column; gap: 10px; }
+.card-icon-wrap {
+  width: 32px;
+  height: 32px;
+  border-radius: $radius-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.card-title {
+  font-size: $font-size-md;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+  flex: 1;
+}
+
+.task-count {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  background: $color-bg-alt;
+  padding: 2px 10px;
+  border-radius: $radius-pill;
+  font-weight: $font-weight-semibold;
+}
+
+// ============================================
+// 今日任务
+// ============================================
+.task-list { display: flex; flex-direction: column; gap: $spacing-sm; }
+
 .task-item {
-  display: flex; align-items: center; gap: 10px;
-  padding: 10px; border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-md;
+  border-radius: $radius-md;
   background: $color-bg;
   cursor: pointer;
-  &:active { background: darken($color-bg, 3%); }
+  transition: all $duration-base $easing-smooth;
+  animation: bounceIn 0.5s $easing-bounce backwards;
+
+  &:active {
+    transform: scale(0.97);
+    background: darken($color-bg, 2%);
+  }
 }
+
 .task-icon {
-  width: 32px; height: 32px; border-radius: 8px;
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
+
 .task-info { flex: 1; }
-.task-name { font-size: 14px; font-weight: 500; color: $color-text-primary; }
-.task-desc { font-size: 12px; color: $color-text-secondary; margin-top: 2px; }
+.task-name {
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+.task-desc {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  margin-top: 2px;
+}
 
+.task-arrow {
+  font-size: 18px;
+  color: $color-text-placeholder;
+  transition: transform $duration-base;
+}
+.task-item:active .task-arrow {
+  transform: translateX(4px);
+}
+
+.empty-task {
+  text-align: center;
+  padding: $spacing-xl 0;
+  .empty-emoji { font-size: 40px; display: block; margin-bottom: 8px; }
+  p { font-size: $font-size-sm; color: $color-text-secondary; }
+}
+
+// ============================================
+// 快捷入口
+// ============================================
 .entry-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-md;
 }
-.entry-item {
-  display: flex; flex-direction: column; align-items: center; gap: 6px;
-  cursor: pointer;
-  &:active { opacity: 0.7; }
-}
-.entry-icon {
-  width: 48px; height: 48px; border-radius: 12px;
-  display: flex; align-items: center; justify-content: center;
-}
-.entry-item span { font-size: 12px; color: $color-text-regular; }
 
-.daily-quote {
-  display: flex; align-items: flex-start; gap: 8px;
+.entry-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: transform $duration-base $easing-bounce;
+
+  &:active { transform: scale(0.88); }
 }
-.quote-text { font-size: 13px; color: $color-text-secondary; line-height: 1.6; flex: 1; }
+
+.entry-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: $radius-md;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all $duration-base;
+
+  .entry-emoji { font-size: 26px; }
+}
+
+.entry-item span {
+  font-size: $font-size-xs;
+  color: $color-text-regular;
+  font-weight: $font-weight-medium;
+}
+
+// ============================================
+// 每日一言
+// ============================================
+.daily-quote-card {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-sm;
+  background: linear-gradient(135deg, #FFF9E6 0%, #FFF5EE 100%);
+  border: 2px solid rgba(255, 200, 100, 0.15);
+}
+
+.quote-deco { font-size: 20px; flex-shrink: 0; }
+
+.quote-text {
+  font-size: $font-size-sm;
+  color: #8B6914;
+  line-height: 1.7;
+  flex: 1;
+  font-weight: $font-weight-medium;
+}
 </style>

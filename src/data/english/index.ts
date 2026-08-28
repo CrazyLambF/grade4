@@ -1,4 +1,7 @@
 import type { SubjectConfig, UnitItem } from '@/types'
+import { englishExtraExercises } from './extraExercises'
+
+export { englishExtraExercises }
 
 const units: UnitItem[] = [
   {
@@ -138,7 +141,7 @@ export const englishConfig: SubjectConfig = {
   type: 'english',
   name: '英语',
   icon: 'comment-o',
-  color: '#7ED321',
-  bgColor: '#F0FBEB',
+  color: '#2EC4B6',
+  bgColor: '#E8F8F6',
   units,
 }

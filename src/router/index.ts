@@ -92,6 +92,24 @@ const routes: RouteRecordRaw[] = [
     meta: { title: '游戏结果', showTabbar: false },
   },
   {
+    path: '/recitation',
+    name: 'Recitation',
+    component: () => import('@/views/chinese/RecitationView.vue'),
+    meta: { title: '语文背诵', showTabbar: false },
+  },
+  {
+    path: '/daily-calc',
+    name: 'DailyCalc',
+    component: () => import('@/views/math/DailyCalcView.vue'),
+    meta: { title: '每日计算', showTabbar: false },
+  },
+  {
+    path: '/daily-words',
+    name: 'DailyWords',
+    component: () => import('@/views/english/DailyWordsView.vue'),
+    meta: { title: '每日词汇', showTabbar: false },
+  },
+  {
     path: '/statistics',
     name: 'Statistics',
     component: () => import('@/views/statistics/StatisticsView.vue'),

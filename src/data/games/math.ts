@@ -22,6 +22,26 @@ export const mathMinuteData = [
   { q: '16×4=?', answer: '64' },
   { q: '560÷80=?', answer: '7' },
   { q: '22×4=?', answer: '88' },
+  { q: '300÷50=?', answer: '6' },
+  { q: '14×5=?', answer: '70' },
+  { q: '270÷30=?', answer: '9' },
+  { q: '36×2=?', answer: '72' },
+  { q: '480÷60=?', answer: '8' },
+  { q: '17×3=?', answer: '51' },
+  { q: '640÷80=?', answer: '8' },
+  { q: '19×4=?', answer: '76' },
+  { q: '210÷70=?', answer: '3' },
+  { q: '26×3=?', answer: '78' },
+  { q: '320÷40=?', answer: '8' },
+  { q: '23×4=?', answer: '92' },
+  { q: '140÷20=?', answer: '7' },
+  { q: '15×8=?', answer: '120' },
+  { q: '450÷90=?', answer: '5' },
+  { q: '28×3=?', answer: '84' },
+  { q: '540÷60=?', answer: '9' },
+  { q: '11×6=?', answer: '66' },
+  { q: '360÷40=?', answer: '9' },
+  { q: '125×4=?', answer: '500' },
 ]
 
 // 角度大挑战 — 根据角度判断类型
@@ -33,9 +53,16 @@ export const angleChallengeData = [
   { angle: 30, type: '锐角' },
   { angle: 60, type: '锐角' },
   { angle: 120, type: '钝角' },
-  { angle: 270, type: '钝角' },
   { angle: 360, type: '周角' },
   { angle: 75, type: '锐角' },
+  { angle: 15, type: '锐角' },
+  { angle: 50, type: '锐角' },
+  { angle: 91, type: '钝角' },
+  { angle: 100, type: '钝角' },
+  { angle: 150, type: '钝角' },
+  { angle: 179, type: '钝角' },
+  { angle: 89, type: '锐角' },
+  { angle: 165, type: '钝角' },
 ]
 
 // 算式消消乐 — 选出能组成正确等式的数字
@@ -48,6 +75,14 @@ export const formulaClearData = [
   { equation: '18×4=?', options: ['62', '72', '82', '92'], answer: '72' },
   { equation: '560÷80=?', options: ['6', '7', '8', '9'], answer: '7' },
   { equation: '13×5=?', options: ['55', '60', '65', '70'], answer: '65' },
+  { equation: '125×8=?', options: ['900', '1000', '800', '1100'], answer: '1000' },
+  { equation: '240÷30=?', options: ['6', '7', '8', '9'], answer: '8' },
+  { equation: '17×4=?', options: ['58', '68', '78', '64'], answer: '68' },
+  { equation: '420÷70=?', options: ['5', '6', '7', '8'], answer: '6' },
+  { equation: '19×5=?', options: ['85', '95', '90', '100'], answer: '95' },
+  { equation: '360÷90=?', options: ['3', '4', '5', '6'], answer: '4' },
+  { equation: '14×6=?', options: ['74', '84', '94', '64'], answer: '84' },
+  { equation: '480÷60=?', options: ['7', '8', '9', '10'], answer: '8' },
 ]
 
 // 图形分类大冒险 — 判断图形属于哪类
@@ -60,4 +95,10 @@ export const shapeSortData = [
   { name: '直角三角形', category: '三角形', options: ['平行四边形', '梯形', '三角形'] },
   { name: '正方形', category: '平行四边形', options: ['平行四边形', '梯形', '三角形'] },
   { name: '直角梯形', category: '梯形', options: ['平行四边形', '梯形', '三角形'] },
+  { name: '菱形', category: '平行四边形', options: ['平行四边形', '梯形', '三角形'] },
+  { name: '钝角三角形', category: '三角形', options: ['平行四边形', '梯形', '三角形'] },
+  { name: '等边三角形', category: '三角形', options: ['平行四边形', '梯形', '三角形'] },
+  { name: '一般梯形', category: '梯形', options: ['平行四边形', '梯形', '三角形'] },
+  { name: '等腰三角形', category: '三角形', options: ['平行四边形', '梯形', '三角形'] },
+  { name: '普通平行四边形', category: '平行四边形', options: ['平行四边形', '梯形', '三角形'] },
 ]

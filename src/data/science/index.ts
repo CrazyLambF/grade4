@@ -1,4 +1,7 @@
 import type { SubjectConfig, UnitItem } from '@/types'
+import { scienceExtraExercises } from './extraExercises'
+
+export { scienceExtraExercises }
 
 const units: UnitItem[] = [
   {
@@ -140,7 +143,7 @@ export const scienceConfig: SubjectConfig = {
   type: 'science',
   name: '科学',
   icon: 'cluster-o',
-  color: '#BD10E0',
-  bgColor: '#F8F0FB',
+  color: '#E84393',
+  bgColor: '#FDF0F7',
   units,
 }

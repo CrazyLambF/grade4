@@ -1,45 +1,120 @@
-// 主题色
-$color-primary: #4E8AF2;
-$color-chinese: #F5A623;
-$color-math: #4E8AF2;
-$color-english: #7ED321;
-$color-science: #BD10E0;
+// ============================================
+// 四上学习帮 — 卡通轻松风格设计令牌 v2.0
+// 目标用户：四年级小学生
+// 设计理念：明亮、圆润、活泼、温暖
+// ============================================
 
-// 状态色
-$color-success: #52C41A;
-$color-warning: #FAAD14;
-$color-error: #FF4D4F;
+// --- 主题色 ---
+$color-primary: #6C5CE7;
+$color-primary-light: #A29BFE;
+$color-primary-dark: #5A4BD1;
 
-// 背景色
-$color-bg: #F5F7FA;
+// --- 学科色（卡通化明亮调色板）---
+$color-chinese: #FF8C42;       // 语文：暖橙色（像柿子）
+$color-chinese-light: #FFE0CC;
+$color-chinese-bg: #FFF5EE;
+
+$color-math: #4E8AF2;          // 数学：天空蓝
+$color-math-light: #C5DBFF;
+$color-math-bg: #EBF3FF;
+
+$color-english: #2EC4B6;       // 英语：薄荷绿（更鲜艳）
+$color-english-light: #B8EDE8;
+$color-english-bg: #E8F8F6;
+
+$color-science: #E84393;       // 科学：粉红（更活泼）
+$color-science-light: #F8C4DC;
+$color-science-bg: #FDF0F7;
+
+// --- 状态色（柔和但清晰）---
+$color-success: #00B894;
+$color-success-bg: #E0F8F2;
+$color-warning: #FDCB6E;
+$color-warning-bg: #FFF5DC;
+$color-error: #FF7675;
+$color-error-bg: #FFE5E5;
+$color-info: #74B9FF;
+
+// --- 背景色 ---
+$color-bg: #F8F9FE;            // 淡蓝白底色，比纯白更温暖
+$color-bg-alt: #F0F2F8;        // 备用底色
 $color-card: #FFFFFF;
-$color-border: #EBEDF0;
+$color-border: #E8ECF4;
+$color-mask: rgba(0, 0, 0, 0.4);
 
-// 文字色
-$color-text-primary: #323233;
-$color-text-regular: #646566;
-$color-text-secondary: #969799;
-$color-text-placeholder: #C8C9CC;
+// --- 文字色 ---
+$color-text-primary: #2D3436;
+$color-text-regular: #636E72;
+$color-text-secondary: #B2BEC3;
+$color-text-placeholder: #DFE6E9;
+$color-text-white: #FFFFFF;
+$color-text-link: $color-primary;
 
-// 字号
-$font-size-lg: 22px;
-$font-size-md: 18px;
-$font-size-base: 16px;
-$font-size-sm: 14px;
-$font-size-xs: 12px;
+// --- 字号（适合小学生，偏大）---
+$font-size-xxl: 28px;
+$font-size-xl: 24px;
+$font-size-lg: 20px;
+$font-size-md: 17px;
+$font-size-base: 15px;
+$font-size-sm: 13px;
+$font-size-xs: 11px;
 
-// 圆角
-$radius-sm: 8px;
-$radius-md: 12px;
-$radius-lg: 16px;
+// --- 字重 ---
+$font-weight-bold: 800;
+$font-weight-semibold: 700;
+$font-weight-medium: 500;
+$font-weight-regular: 400;
 
-// 间距
+// --- 圆角（更大圆角 = 更可爱）---
+$radius-xs: 6px;
+$radius-sm: 10px;
+$radius-md: 16px;
+$radius-lg: 20px;
+$radius-xl: 28px;
+$radius-pill: 999px;
+$radius-circle: 50%;
+
+// --- 间距 ---
+$spacing-xxs: 2px;
 $spacing-xs: 4px;
 $spacing-sm: 8px;
-$spacing-md: 16px;
-$spacing-lg: 24px;
-$spacing-xl: 32px;
+$spacing-md: 12px;
+$spacing-base: 16px;
+$spacing-lg: 20px;
+$spacing-xl: 24px;
+$spacing-xxl: 32px;
 
-// 安全区域
+// --- 阴影（柔和投影 = 卡通感）---
+$shadow-xs: 0 1px 3px rgba(108, 92, 231, 0.06);
+$shadow-sm: 0 2px 8px rgba(108, 92, 231, 0.08);
+$shadow-md: 0 4px 16px rgba(108, 92, 231, 0.10);
+$shadow-lg: 0 8px 24px rgba(108, 92, 231, 0.12);
+$shadow-xl: 0 12px 40px rgba(108, 92, 231, 0.15);
+$shadow-card: 0 4px 12px rgba(108, 92, 231, 0.06);
+$shadow-hover: 0 8px 20px rgba(108, 92, 231, 0.12);
+$shadow-float: 0 12px 36px rgba(108, 92, 231, 0.18);
+
+// --- 渐变 ---
+$gradient-primary: linear-gradient(135deg, #6C5CE7 0%, #A29BFE 100%);
+$gradient-chinese: linear-gradient(135deg, #FF8C42 0%, #FFB347 100%);
+$gradient-math: linear-gradient(135deg, #4E8AF2 0%, #74B9FF 100%);
+$gradient-english: linear-gradient(135deg, #2EC4B6 0%, #55EFC4 100%);
+$gradient-science: linear-gradient(135deg, #E84393 0%, #FD79A8 100%);
+$gradient-sunny: linear-gradient(135deg, #FDCB6E 0%, #FFB347 100%);
+$gradient-sky: linear-gradient(180deg, #A8DCFF 0%, #DFEEFF 100%);
+$gradient-rainbow: linear-gradient(135deg, #FF8C42, #FDCB6E, #2EC4B6, #6C5CE7, #E84393);
+
+// --- 动画时长 ---
+$duration-fast: 0.15s;
+$duration-base: 0.25s;
+$duration-slow: 0.4s;
+$easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+$easing-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+// --- 安全区域 ---
 $safe-top: env(safe-area-inset-top);
 $safe-bottom: env(safe-area-inset-bottom);
+$tabbar-height: 60px;
+
+// --- 字体族 ---
+$font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;

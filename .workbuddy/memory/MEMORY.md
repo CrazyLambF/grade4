@@ -22,3 +22,12 @@
 - 代码分包：vant/echarts/vendor 单独打包
 - 开发命令：`npm run dev`（带--host支持手机真机调试）
 - 构建命令：`npm run build`
+
+## 设计系统 v2.0（卡通风格）
+- 主色：#6C5CE7（紫色），渐变 #6C5CE7→#A29BFE
+- 学科色：语文#FF8C42(暖橙)、数学#4E8AF2(天蓝)、英语#2EC4B6(薄荷)、科学#E84393(粉红)
+- 圆角：6/10/16/20/28px + pill(999px)
+- 阴影：紫色系 rgba(108,92,231,x)
+- 卡通元素：emoji图标、bubble-dot装饰、bounceIn/float/heartbeat动画
+- 字号：偏大(15px base)，字重800 bold
+- Vant覆盖：Tabbar圆角凸起、按钮pill圆角、Tab加粗高亮

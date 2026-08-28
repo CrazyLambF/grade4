@@ -10,6 +10,9 @@ html, body {
   width: 100%;
   min-height: 100vh;
   background-color: $color-bg;
+  font-family: $font-family;
+  font-size: $font-size-base;
+  color: $color-text-primary;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
@@ -34,62 +37,91 @@ img {
   max-width: 100%;
 }
 
+// ============================================
 // 通用页面容器
+// ============================================
 .page-container {
   min-height: 100vh;
-  padding-bottom: calc(50px + #{$safe-bottom});
+  padding-bottom: calc(#{$tabbar-height} + #{$safe-bottom} + 8px);
   background-color: $color-bg;
 }
 
-// 通用卡片
+// ============================================
+// 通用卡片 — 圆润、柔和投影
+// ============================================
 .card {
   background: $color-card;
-  border-radius: $radius-md;
-  padding: $spacing-md;
-  margin: $spacing-sm $spacing-md;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  border-radius: $radius-lg;
+  padding: $spacing-base;
+  margin: $spacing-sm $spacing-base;
+  box-shadow: $shadow-card;
+  border: 2px solid transparent;
+  transition: all $duration-base $easing-smooth;
+
+  &:active {
+    transform: scale(0.98);
+    box-shadow: $shadow-sm;
+  }
 }
 
+// ============================================
 // 学科标签
+// ============================================
 .subject-tag {
-  display: inline-block;
-  padding: 2px 8px;
-  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: $radius-pill;
   font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
   color: #fff;
 
-  &--chinese { background: $color-chinese; }
-  &--math { background: $color-math; }
-  &--english { background: $color-english; }
-  &--science { background: $color-science; }
+  &--chinese { background: $gradient-chinese; }
+  &--math { background: $gradient-math; }
+  &--english { background: $gradient-english; }
+  &--science { background: $gradient-science; }
 }
 
+// ============================================
 // 难度标签
+// ============================================
 .difficulty-tag {
-  display: inline-block;
-  padding: 2px 6px;
-  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: $radius-pill;
   font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
 
-  &--easy { background: #E8F5E9; color: #2E7D32; }
-  &--medium { background: #FFF3E0; color: #E65100; }
-  &--hard { background: #FFEBEE; color: #C62828; }
+  &--easy { background: $color-success-bg; color: $color-success; }
+  &--medium { background: $color-warning-bg; color: #E67E22; }
+  &--hard { background: $color-error-bg; color: $color-error; }
 }
 
+// ============================================
 // 页面标题
+// ============================================
 .page-title {
-  font-size: $font-size-lg;
-  font-weight: 700;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
   color: $color-text-primary;
-  padding: $spacing-md;
+  padding: $spacing-base;
 }
 
-// 渐变背景
-.gradient-primary {
-  background: linear-gradient(135deg, $color-primary 0%, #6BA6FF 100%);
-}
+// ============================================
+// 渐变背景工具类
+// ============================================
+.gradient-primary { background: $gradient-primary; }
+.gradient-chinese { background: $gradient-chinese; }
+.gradient-math { background: $gradient-math; }
+.gradient-english { background: $gradient-english; }
+.gradient-science { background: $gradient-science; }
+.gradient-sunny { background: $gradient-sunny; }
+.gradient-sky { background: $gradient-sky; }
 
+// ============================================
 // 文字省略
+// ============================================
 .text-ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -103,20 +135,182 @@ img {
   overflow: hidden;
 }
 
-// 页面淡入动画
+// ============================================
+// 页面动画
+// ============================================
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.25s ease;
+  transition: opacity $duration-base ease;
 }
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
 }
 
-// 滑动动画
 .slide-enter-active {
-  transition: all 0.3s ease;
+  transition: all $duration-slow $easing-smooth;
 }
 .slide-enter-from {
   transform: translateX(100%);
+}
+
+// ============================================
+// 卡通装饰元素
+// ============================================
+
+// 气泡装饰圆点
+.bubble-dot {
+  position: absolute;
+  border-radius: $radius-circle;
+  pointer-events: none;
+
+  &--1 {
+    width: 80px; height: 80px;
+    background: rgba(255, 255, 255, 0.1);
+    top: -20px; right: -10px;
+  }
+  &--2 {
+    width: 50px; height: 50px;
+    background: rgba(255, 255, 255, 0.08);
+    bottom: -15px; left: 20px;
+  }
+  &--3 {
+    width: 30px; height: 30px;
+    background: rgba(255, 255, 255, 0.12);
+    top: 40%; right: 15%;
+  }
+}
+
+// 弹跳入场动画
+@keyframes bounceIn {
+  0% { transform: scale(0.3); opacity: 0; }
+  50% { transform: scale(1.05); opacity: 1; }
+  70% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0); opacity: 0; }
+  80% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+// 动画工具类
+.anim-bounce-in { animation: bounceIn 0.6s $easing-bounce; }
+.anim-float { animation: float 3s ease-in-out infinite; }
+.anim-wiggle { animation: wiggle 0.5s ease-in-out infinite; }
+.anim-pop-in { animation: popIn 0.3s $easing-bounce; }
+.anim-heartbeat { animation: heartbeat 1.5s ease-in-out infinite; }
+
+// ============================================
+// Vant 主题覆盖
+// ============================================
+
+// 导航栏
+.van-nav-bar {
+  background: transparent !important;
+
+  .van-nav-bar__title {
+    font-size: $font-size-md;
+    font-weight: $font-weight-bold;
+    color: $color-text-primary;
+  }
+
+  .van-nav-bar__arrow {
+    font-size: 18px;
+    color: $color-text-primary;
+  }
+}
+
+// 标签栏
+.van-tabbar {
+  height: $tabbar-height !important;
+  border-top: none !important;
+  box-shadow: 0 -4px 20px rgba(108, 92, 231, 0.08) !important;
+  border-radius: $radius-xl $radius-xl 0 0 !important;
+  overflow: hidden;
+
+  .van-tabbar-item {
+    &__icon {
+      font-size: 22px !important;
+      margin-bottom: 2px !important;
+    }
+
+    &--active {
+      .van-tabbar-item__icon {
+        animation: heartbeat 2s ease-in-out infinite;
+      }
+    }
+  }
+}
+
+// 按钮
+.van-button {
+  border-radius: $radius-pill !important;
+  font-weight: $font-weight-semibold !important;
+  transition: all $duration-base $easing-bounce !important;
+
+  &:active {
+    transform: scale(0.95) !important;
+  }
+}
+
+// Tab
+.van-tabs {
+  .van-tab {
+    font-size: $font-size-base !important;
+    font-weight: $font-weight-medium !important;
+
+    &--active {
+      font-weight: $font-weight-bold !important;
+      font-size: $font-size-md !important;
+    }
+  }
+
+  .van-tabs__line {
+    border-radius: $radius-pill !important;
+    height: 3px !important;
+  }
+}
+
+// Cell
+.van-cell {
+  border-radius: $radius-sm !important;
+  margin: $spacing-xs 0;
+  font-size: $font-size-base !important;
+
+  &:active {
+    background-color: $color-bg-alt !important;
+  }
+}
+
+// Empty
+.van-empty {
+  padding: $spacing-xl 0 !important;
+}
+
+// Toast
+.van-toast {
+  border-radius: $radius-md !important;
+  font-size: $font-size-base !important;
 }

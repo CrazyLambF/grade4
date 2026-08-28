@@ -1,0 +1,26 @@
+import type { Question } from '@/types'
+
+export const mathExtraExercises: Question[] = [
+  { id: 'ma-1-1-4', subject: 'math', unit: 1, lesson: 1, type: 'fill', difficulty: 1, content: '一个数由5个百万、3个万和6个百组成，这个数是______。', answer: '5030600', analysis: '5在百万位3在万位6在百位', knowledgePoints: ['数的组成'] },
+  { id: 'ma-1-1-5', subject: 'math', unit: 1, lesson: 1, type: 'choice', difficulty: 2, content: '下面哪个数一个零也不读？', options: ['5005005', '5500000', '5050500', '5000505'], answer: '5500000', analysis: '万级末尾0不读', knowledgePoints: ['数的读法'] },
+  { id: 'ma-1-1-6', subject: 'math', unit: 1, lesson: 1, type: 'calculate', difficulty: 1, content: '3456+2789=', answer: '6245', analysis: '3456+2789=6245', knowledgePoints: ['加法'] },
+  { id: 'ma-1-3-3', subject: 'math', unit: 1, lesson: 3, type: 'fill', difficulty: 2, content: '9□8765000约等于9亿，□里最大填______。', answer: '4', analysis: '四舍五入千万位小于5舍去', knowledgePoints: ['近似数'] },
+  { id: 'ma-1-3-4', subject: 'math', unit: 1, lesson: 3, type: 'choice', difficulty: 2, content: '省略万位后面尾数：4567800约等于', options: ['456万', '457万', '4568万', '456.78万'], answer: '457万', analysis: '千位8大于5进1', knowledgePoints: ['近似数'] },
+  { id: 'ma-2-1-3', subject: 'math', unit: 2, lesson: 1, type: 'fill', difficulty: 2, content: '7140平方米=______公顷。', answer: '0.714', analysis: '7140/10000=0.714', knowledgePoints: ['面积换算'] },
+  { id: 'ma-2-1-4', subject: 'math', unit: 2, lesson: 1, type: 'choice', difficulty: 2, content: '天安门广场面积约40什么？', options: ['平方米', '公顷', '平方千米', '千米'], answer: '公顷', analysis: '约40公顷', knowledgePoints: ['面积单位'] },
+  { id: 'ma-3-1-3', subject: 'math', unit: 3, lesson: 1, type: 'choice', difficulty: 2, content: '经过两点可以画几条直线？', options: ['0条', '1条', '2条', '无数条'], answer: '1条', analysis: '两点确定一条直线', knowledgePoints: ['直线'] },
+  { id: 'ma-3-3-4', subject: 'math', unit: 3, lesson: 3, type: 'fill', difficulty: 2, content: '一个角是45度，它的2倍是______度，是______角。', answer: ['90', '直'], analysis: '45乘2等于90度是直角', knowledgePoints: ['角的计算'] },
+  { id: 'ma-3-3-5', subject: 'math', unit: 3, lesson: 3, type: 'choice', difficulty: 2, content: '钟面上3时整时针和分针成什么角？', options: ['锐角', '直角', '钝角', '平角'], answer: '直角', analysis: '3时整夹角90度', knowledgePoints: ['钟面角'] },
+  { id: 'ma-4-1-3', subject: 'math', unit: 4, lesson: 1, type: 'calculate', difficulty: 1, content: '225乘14=', answer: '3150', analysis: '225乘14等于3150', knowledgePoints: ['三位数乘两位数'] },
+  { id: 'ma-4-1-4', subject: 'math', unit: 4, lesson: 1, type: 'calculate', difficulty: 2, content: '378乘45=', answer: '17010', analysis: '378乘45等于17010', knowledgePoints: ['三位数乘两位数'] },
+  { id: 'ma-4-2-2', subject: 'math', unit: 4, lesson: 2, type: 'fill', difficulty: 2, content: '已知36乘5等于180，则36乘50等于______。', answer: '1800', analysis: '因数5乘10积也乘10', knowledgePoints: ['积的变化规律'] },
+  { id: 'ma-4-2-3', subject: 'math', unit: 4, lesson: 2, type: 'choice', difficulty: 2, content: '一个因数乘3另一个不变积怎么变？', options: ['不变', '乘3', '除以3', '乘9'], answer: '乘3', analysis: '一个因数不变另一个乘n积乘n', knowledgePoints: ['积的变化规律'] },
+  { id: 'ma-5-1-3', subject: 'math', unit: 5, lesson: 1, type: 'choice', difficulty: 2, content: '同一平面内不重合的两条直线位置关系是？', options: ['平行或相交', '只能平行', '只能垂直', '只能相交'], answer: '平行或相交', analysis: '要么平行要么相交', knowledgePoints: ['位置关系'] },
+  { id: 'ma-5-2-3', subject: 'math', unit: 5, lesson: 2, type: 'choice', difficulty: 2, content: '长方形是特殊的什么图形？', options: ['梯形', '平行四边形', '三角形', '正方形'], answer: '平行四边形', analysis: '长方形两组对边平行', knowledgePoints: ['平行四边形'] },
+  { id: 'ma-6-1-3', subject: 'math', unit: 6, lesson: 1, type: 'calculate', difficulty: 1, content: '240除以40=', answer: '6', analysis: '想40乘6等于240', knowledgePoints: ['口算除法'] },
+  { id: 'ma-6-2-4', subject: 'math', unit: 6, lesson: 2, type: 'calculate', difficulty: 2, content: '588除以84=', answer: '7', analysis: '84乘7等于588', knowledgePoints: ['笔算除法'] },
+  { id: 'ma-6-2-5', subject: 'math', unit: 6, lesson: 2, type: 'calculate', difficulty: 2, content: '432除以48=', answer: '9', analysis: '48乘9等于432', knowledgePoints: ['笔算除法'] },
+  { id: 'ma-6-2-6', subject: 'math', unit: 6, lesson: 2, type: 'judge', difficulty: 2, content: '在除法中余数是5，除数至少是6。', options: ['正确', '错误'], answer: '正确', analysis: '余数必须比除数小', knowledgePoints: ['余数'] },
+  { id: 'ma-7-1-2', subject: 'math', unit: 7, lesson: 1, type: 'choice', difficulty: 1, content: '条形统计图一格代表5，画3格表示多少？', options: ['3', '5', '15', '8'], answer: '15', analysis: '5乘3等于15', knowledgePoints: ['条形统计图'] },
+  { id: 'ma-8-1-2', subject: 'math', unit: 8, lesson: 1, type: 'choice', difficulty: 2, content: '煎一面饼需2分钟，锅里最多放2张，煎3张最少需几分钟？', options: ['4分钟', '6分钟', '8分钟', '3分钟'], answer: '6分钟', analysis: '合理安排3张饼轮流煎', knowledgePoints: ['优化'] },
+]

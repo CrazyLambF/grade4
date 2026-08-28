@@ -1,4 +1,7 @@
 import type { SubjectConfig, UnitItem } from '@/types'
+import { mathExtraExercises } from './extraExercises'
+
+export { mathExtraExercises }
 
 const units: UnitItem[] = [
   {

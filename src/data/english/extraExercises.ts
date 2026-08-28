@@ -1,0 +1,25 @@
+import type { Question } from '@/types'
+
+export const englishExtraExercises: Question[] = [
+  { id: 'en-1-1-4', subject: 'english', unit: 1, lesson: 1, type: 'choice', difficulty: 1, content: 'What does "blackboard" mean?', options: ['门', '黑板', '灯', '窗户'], answer: '黑板', analysis: 'blackboard = 黑板', knowledgePoints: ['vocabulary'] },
+  { id: 'en-1-1-5', subject: 'english', unit: 1, lesson: 1, type: 'fill', difficulty: 1, content: 'Close the ____（窗户）.', answer: 'window', analysis: 'window = 窗户', knowledgePoints: ['vocabulary'] },
+  { id: 'en-1-1-6', subject: 'english', unit: 1, lesson: 1, type: 'choice', difficulty: 2, content: '"Put up the picture" means?', options: ['收起图画', '挂上图画', '撕掉图画', '画图画'], answer: '挂上图画', analysis: 'put up = 挂上', knowledgePoints: ['phrases'] },
+  { id: 'en-1-1-7', subject: 'english', unit: 1, lesson: 1, type: 'judge', difficulty: 1, content: 'Turn on the light 意思是关灯。', options: ['正确', '错误'], answer: '错误', analysis: 'turn on = 打开', knowledgePoints: ['phrases'] },
+  { id: 'en-2-1-3', subject: 'english', unit: 2, lesson: 1, type: 'choice', difficulty: 1, content: 'What does "storybook" mean?', options: ['笔记本', '故事书', '英语书', '数学书'], answer: '故事书', analysis: 'storybook = 故事书', knowledgePoints: ['vocabulary'] },
+  { id: 'en-2-1-4', subject: 'english', unit: 2, lesson: 1, type: 'fill', difficulty: 1, content: 'How many ____ (book) do you have?', answer: 'books', analysis: 'how many后用复数', knowledgePoints: ['grammar'] },
+  { id: 'en-2-1-5', subject: 'english', unit: 2, lesson: 1, type: 'choice', difficulty: 2, content: 'I have ___ English book and two storybooks.', options: ['a', 'an', 'the', '/'], answer: 'an', analysis: 'English以元音开头用an', knowledgePoints: ['grammar'] },
+  { id: 'en-3-1-3', subject: 'english', unit: 3, lesson: 1, type: 'choice', difficulty: 1, content: '"strong" means?', options: ['瘦的', '强壮的', '安静的', '矮的'], answer: '强壮的', analysis: 'strong = 强壮的', knowledgePoints: ['vocabulary'] },
+  { id: 'en-3-1-4', subject: 'english', unit: 3, lesson: 1, type: 'choice', difficulty: 2, content: 'He ___ short hair and big eyes.', options: ['is', 'has', 'are', 'have'], answer: 'has', analysis: 'has+名词(头发眼睛)', knowledgePoints: ['grammar'] },
+  { id: 'en-3-1-5', subject: 'english', unit: 3, lesson: 1, type: 'fill', difficulty: 1, content: 'She is tall and ____（瘦的）.', answer: 'thin', analysis: 'thin = 瘦的', knowledgePoints: ['vocabulary'] },
+  { id: 'en-4-1-3', subject: 'english', unit: 4, lesson: 1, type: 'choice', difficulty: 1, content: 'What does "study" mean?', options: ['卧室', '厨房', '书房', '浴室'], answer: '书房', analysis: 'study = 书房', knowledgePoints: ['vocabulary'] },
+  { id: 'en-4-1-4', subject: 'english', unit: 4, lesson: 1, type: 'choice', difficulty: 2, content: 'Is she in the bedroom? Yes, ___.', options: ['she is', 'she is not', 'she does', 'she do'], answer: 'she is', analysis: 'Is问句用Yes, she is回答', knowledgePoints: ['grammar'] },
+  { id: 'en-4-1-5', subject: 'english', unit: 4, lesson: 1, type: 'fill', difficulty: 1, content: 'The cat is ___ the sofa. (在沙发上)', answer: 'on', analysis: 'on表示在上面', knowledgePoints: ['prepositions'] },
+  { id: 'en-5-1-3', subject: 'english', unit: 5, lesson: 1, type: 'choice', difficulty: 1, content: 'What does "soup" mean?', options: ['米饭', '汤', '牛肉', '面包'], answer: '汤', analysis: 'soup = 汤', knowledgePoints: ['vocabulary'] },
+  { id: 'en-5-1-4', subject: 'english', unit: 5, lesson: 1, type: 'choice', difficulty: 2, content: "What ___ you like? I'd like some rice.", options: ['do', 'would', 'are', 'is'], answer: 'would', analysis: 'What would you like? 询问想要什么', knowledgePoints: ['sentence pattern'] },
+  { id: 'en-5-1-5', subject: 'english', unit: 5, lesson: 1, type: 'fill', difficulty: 1, content: "I'd like some ____ (牛肉).", answer: 'beef', analysis: 'beef = 牛肉', knowledgePoints: ['vocabulary'] },
+  { id: 'en-5-1-6', subject: 'english', unit: 5, lesson: 1, type: 'choice', difficulty: 2, content: 'Eat more ___. They are good for you.', options: ['beef', 'vegetable', 'rice', 'chicken'], answer: 'vegetable', analysis: 'eat more vegetables多吃蔬菜', knowledgePoints: ['vocabulary'] },
+  { id: 'en-6-1-3', subject: 'english', unit: 6, lesson: 1, type: 'choice', difficulty: 1, content: 'What does "uncle" mean?', options: ['阿姨', '叔叔', '表亲', '婴儿'], answer: '叔叔', analysis: 'uncle = 叔叔/舅舅', knowledgePoints: ['vocabulary'] },
+  { id: 'en-6-1-4', subject: 'english', unit: 6, lesson: 1, type: 'choice', difficulty: 2, content: 'How many ___ are there in your family?', options: ['people', 'peoples', 'person', 'a people'], answer: 'people', analysis: 'people本身就是复数', knowledgePoints: ['grammar'] },
+  { id: 'en-6-1-5', subject: 'english', unit: 6, lesson: 1, type: 'fill', difficulty: 2, content: 'My mother\'s sister is my ____.', answer: 'aunt', analysis: '母亲的姐妹是aunt', knowledgePoints: ['family members'] },
+  { id: 'en-6-1-6', subject: 'english', unit: 6, lesson: 1, type: 'choice', difficulty: 2, content: 'This is my ___ . He is a doctor.', options: ['father', 'mother', 'sister', 'aunt'], answer: 'father', analysis: 'He是男性排除mother/aunt', knowledgePoints: ['vocabulary'] },
+]
