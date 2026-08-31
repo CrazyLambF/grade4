@@ -35,8 +35,9 @@ export async function getUserInfo(): Promise<UserInfo | undefined> {
 export async function saveUserInfo(info: UserInfo): Promise<number> {
   const raw = toRaw(info)
   const existing = await getUserInfo()
-  if (existing && existing.name !== undefined) {
-    return await db.userInfo.update(1, raw)
+  if (existing && existing.id !== undefined) {
+    // 用 put 完整替换，避免 update/modify 内部的合并操作触发 DataCloneError
+    return await db.userInfo.put({ ...raw, id: existing.id })
   }
   return await db.userInfo.add(raw)
 }

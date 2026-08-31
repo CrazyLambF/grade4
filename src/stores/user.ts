@@ -3,6 +3,11 @@ import { ref, computed } from 'vue'
 import type { UserInfo, SubjectType } from '@/types'
 import { getUserInfo, saveUserInfo } from '@/composables/useDB'
 
+// 深拷贝脱壳：确保不把 Vue 响应式 Proxy 传给 IndexedDB
+function toPlain<T>(obj: T): T {
+  return JSON.parse(JSON.stringify(obj))
+}
+
 export const useUserStore = defineStore('user', () => {
   const userInfo = ref<UserInfo | null>(null)
   const isLoggedIn = computed(() => userInfo.value !== null)
@@ -29,7 +34,7 @@ export const useUserStore = defineStore('user', () => {
 
   async function updateUser(info: Partial<UserInfo>) {
     if (userInfo.value) {
-      const updated = { ...userInfo.value, ...info }
+      const updated = toPlain({ ...userInfo.value, ...info })
       await saveUserInfo(updated)
       userInfo.value = updated
     }
@@ -37,8 +42,10 @@ export const useUserStore = defineStore('user', () => {
 
   async function updateUnitProgress(subject: SubjectType, unit: number) {
     if (userInfo.value) {
-      userInfo.value.currentUnit[subject] = unit
-      await saveUserInfo(userInfo.value)
+      const plain = toPlain(userInfo.value)
+      plain.currentUnit[subject] = unit
+      await saveUserInfo(plain)
+      userInfo.value = plain
     }
   }
 
@@ -48,13 +55,15 @@ export const useUserStore = defineStore('user', () => {
     if (userInfo.value.lastStudyDate === today) return
 
     const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0]
-    if (userInfo.value.lastStudyDate === yesterday) {
-      userInfo.value.streakDays += 1
+    const plain = toPlain(userInfo.value)
+    if (plain.lastStudyDate === yesterday) {
+      plain.streakDays += 1
     } else {
-      userInfo.value.streakDays = 1
+      plain.streakDays = 1
     }
-    userInfo.value.lastStudyDate = today
-    await saveUserInfo(userInfo.value)
+    plain.lastStudyDate = today
+    await saveUserInfo(plain)
+    userInfo.value = plain
   }
 
   return { userInfo, isLoggedIn, loadUser, updateUser, updateUnitProgress, checkStreak }
