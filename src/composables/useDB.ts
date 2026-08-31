@@ -22,22 +22,28 @@ export class StudyDB extends Dexie {
 
 export const db = new StudyDB()
 
+// 深拷贝脱壳：将 Vue 响应式对象转为普通对象，避免 IndexedDB DataCloneError
+function toRaw<T>(obj: T): T {
+  return JSON.parse(JSON.stringify(obj))
+}
+
 // 用户信息操作
 export async function getUserInfo(): Promise<UserInfo | undefined> {
   return await db.userInfo.toCollection().first()
 }
 
 export async function saveUserInfo(info: UserInfo): Promise<number> {
+  const raw = toRaw(info)
   const existing = await getUserInfo()
   if (existing && existing.name !== undefined) {
-    return await db.userInfo.update(1, info)
+    return await db.userInfo.update(1, raw)
   }
-  return await db.userInfo.add(info)
+  return await db.userInfo.add(raw)
 }
 
 // 学习记录操作
 export async function addStudyRecord(record: StudyRecord): Promise<number> {
-  return await db.studyRecords.add(record)
+  return await db.studyRecords.add(toRaw(record))
 }
 
 export async function getStudyRecordsByDate(date: string): Promise<StudyRecord[]> {
@@ -54,7 +60,7 @@ export async function addMistake(record: MistakeRecord): Promise<number> {
   if (existing) {
     return await db.mistakes.update(existing.id!, { retryCount: existing.retryCount + 1, mastered: false })
   }
-  return await db.mistakes.add(record)
+  return await db.mistakes.add(toRaw(record))
 }
 
 export async function getMistakesBySubject(subject: string): Promise<MistakeRecord[]> {
@@ -71,7 +77,7 @@ export async function markMistakeMastered(id: number): Promise<void> {
 
 // 练习记录操作
 export async function addPracticeRecord(record: PracticeRecord): Promise<number> {
-  return await db.practices.add(record)
+  return await db.practices.add(toRaw(record))
 }
 
 export async function getPracticeRecords(type: string): Promise<PracticeRecord[]> {
@@ -84,7 +90,7 @@ export async function getPracticeRecord(id: number): Promise<PracticeRecord | un
 
 // 游戏记录操作
 export async function addGameRecord(record: GameRecord): Promise<number> {
-  return await db.gameRecords.add(record)
+  return await db.gameRecords.add(toRaw(record))
 }
 
 export async function getGameRecords(subject?: string): Promise<GameRecord[]> {
