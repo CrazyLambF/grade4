@@ -14,6 +14,24 @@
           <span class="banner-unit">分</span>
         </div>
         <p class="banner-tip">学习累了？来玩个游戏放松一下吧！</p>
+
+        <!-- 统计数据 -->
+        <div class="banner-stats" v-if="totalPlays > 0">
+          <div class="banner-stat">
+            <span class="banner-stat-num">{{ totalPlays }}</span>
+            <span class="banner-stat-label">总场次</span>
+          </div>
+          <div class="banner-stat-divider"></div>
+          <div class="banner-stat">
+            <span class="banner-stat-num">{{ gamesPlayed }}</span>
+            <span class="banner-stat-label">已玩</span>
+          </div>
+          <div class="banner-stat-divider"></div>
+          <div class="banner-stat">
+            <span class="banner-stat-num">{{ gamesTotal }}</span>
+            <span class="banner-stat-label">总数</span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -52,7 +70,7 @@
       <!-- 每日推荐 -->
       <router-link
         class="card daily-recommend-card"
-        :style="{ background: dailyColor + '12' }"
+        :style="{ background: dailyColor + '12', borderColor: dailyColor + '30' }"
         :to="{ name: 'GamePlay', params: { subject: dailyGame.subject, gameId: dailyGame.id } }"
       >
         <div class="daily-gift anim-float">🎁</div>
@@ -118,6 +136,11 @@ const totalScore = computed(() => gamesStore.totalScore)
 const recentGames = ref<GameRecord[]>([])
 const bestScores = ref<Record<string, number>>({})
 
+// 统计数据
+const totalPlays = computed(() => recentGames.value.length)
+const gamesPlayed = computed(() => new Set(recentGames.value.map(g => g.gameId)).size)
+const gamesTotal = computed(() => gameConfigs.length)
+
 // 每日推荐：按日期取模轮换
 const dailyGame = computed(() => {
   const day = Math.floor(Date.now() / 86400000)
@@ -161,7 +184,6 @@ function formatTime(iso: string) {
 
 onMounted(async () => {
   recentGames.value = await getGameRecords()
-  // 计算各游戏最高分
   for (const g of gameConfigs) {
     const best = await gamesStore.getBestScore(g.subject, g.id)
     if (best > 0) bestScores.value[g.id] = best
@@ -226,6 +248,17 @@ a.recent-item, a.game-card, a.daily-recommend-card {
   opacity: 0.85;
   margin-top: 4px;
 }
+
+// Banner 统计
+.banner-stats {
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+  margin-top: 12px; padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+}
+.banner-stat { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.banner-stat-num { font-size: 18px; font-weight: 700; }
+.banner-stat-label { font-size: 11px; opacity: 0.8; }
+.banner-stat-divider { width: 1px; height: 24px; background: rgba(255,255,255,0.3); }
 
 // ============================================
 // 最近游戏
