@@ -52,6 +52,21 @@
       </div>
     </div>
 
+    <!-- 情绪调整入口 -->
+    <div class="mood-entry-card" @click="$router.push('/mood')">
+      <div class="mood-entry-left">
+        <div class="mood-entry-emoji anim-float">🌈</div>
+        <div class="mood-entry-text">
+          <p class="mood-entry-title">心情小屋</p>
+          <p class="mood-entry-desc">不开心？来这儿找安慰～</p>
+        </div>
+      </div>
+      <div class="mood-entry-right">
+        <span class="mood-entry-tag">{{ todayMoodEmoji }}</span>
+        <span class="mood-entry-arrow">→</span>
+      </div>
+    </div>
+
     <!-- 今日学习任务 -->
     <div class="card today-task-card">
       <div class="card-header">
@@ -166,6 +181,24 @@ const subjectStore = useSubjectStore()
 
 const userName = computed(() => userStore.userInfo?.name || '同学')
 const streakDays = computed(() => userStore.userInfo?.streakDays || 0)
+
+// 今日心情 emoji（从 localStorage 读取最近一次记录）
+const todayMoodEmoji = computed(() => {
+  try {
+    const raw = localStorage.getItem('mood_records')
+    if (raw) {
+      const records = JSON.parse(raw)
+      if (Array.isArray(records) && records.length > 0) {
+        const today = new Date()
+        const todayStr = `${today.getMonth() + 1}/${today.getDate()}`
+        const todayRecord = records.find((r: { date: string }) => r.date?.startsWith(todayStr))
+        if (todayRecord) return todayRecord.emoji
+        return records[0].emoji
+      }
+    }
+  } catch { /* ignore */ }
+  return '💭'
+})
 
 const subjects = computed(() => Object.values(subjectStore.subjects))
 
@@ -403,6 +436,66 @@ onMounted(() => {
   padding: 2px 10px;
   border-radius: $radius-pill;
   font-weight: $font-weight-semibold;
+}
+
+// ============================================
+// 情绪调整入口
+// ============================================
+.mood-entry-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: $spacing-base $spacing-base $spacing-sm;
+  padding: $spacing-md $spacing-base;
+  border-radius: $radius-lg;
+  background: linear-gradient(135deg, #F3E8FF 0%, #E8DBFF 100%);
+  border: 2px solid rgba(162, 155, 254, 0.2);
+  cursor: pointer;
+  transition: all $duration-base $easing-bounce;
+  animation: bounceIn 0.5s $easing-bounce;
+
+  &:active {
+    transform: scale(0.97);
+    box-shadow: $shadow-sm;
+  }
+}
+
+.mood-entry-left {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.mood-entry-emoji {
+  font-size: 36px;
+}
+
+.mood-entry-title {
+  font-size: $font-size-md;
+  font-weight: $font-weight-bold;
+  color: #5A4BD1;
+}
+
+.mood-entry-desc {
+  font-size: $font-size-xs;
+  color: #8B7FE0;
+  margin-top: 2px;
+}
+
+.mood-entry-right {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.mood-entry-tag {
+  font-size: 24px;
+}
+
+.mood-entry-arrow {
+  font-size: 18px;
+  color: #A29BFE;
+  font-weight: $font-weight-bold;
 }
 
 // ============================================

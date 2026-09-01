@@ -121,6 +121,12 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/profile/ProfileView.vue'),
     meta: { title: '我的', showTabbar: true },
   },
+  {
+    path: '/mood',
+    name: 'Mood',
+    component: () => import('@/views/mood/MoodView.vue'),
+    meta: { title: '心情小屋', showTabbar: false },
+  },
 ]
 
 const router = createRouter({
