@@ -1,5 +1,5 @@
 // 四年级数学随机题目生成器
-// 覆盖人教版四上各单元计算题型，按难度分层
+// 覆盖人教版2026秋版四上各单元计算题型，按难度分层
 
 export interface MathQuestion {
   content: string       // 题目展示文本
@@ -18,14 +18,6 @@ function pick<T>(arr: T[]): T {
   return arr[randInt(0, arr.length - 1)]
 }
 
-// 确保除法结果为整数
-function genDiv(divisorMin: number, divisorMax: number, quotientMin: number, quotientMax: number) {
-  const divisor = randInt(divisorMin, divisorMax)
-  const quotient = randInt(quotientMin, quotientMax)
-  const dividend = divisor * quotient
-  return { dividend, divisor, quotient }
-}
-
 // 确保减法结果为正
 function genSub(minA: number, maxA: number, minB: number, maxB: number) {
   const a = randInt(minA, maxA)
@@ -33,7 +25,7 @@ function genSub(minA: number, maxA: number, minB: number, maxB: number) {
   return { a, b, result: a - b }
 }
 
-// ===== Unit 1: 大数的认识 =====
+// ===== Unit 1: 万以上数的认识 =====
 function genBigNumber(d: Difficulty): MathQuestion {
   const type = randInt(0, 3)
   if (type === 0) {
@@ -93,7 +85,6 @@ function genBigNumber(d: Difficulty): MathQuestion {
 function numToChineseRead(num: number): string {
   const digitCN = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九']
   const str = String(num)
-  // 按万分级
   const len = str.length
   if (len <= 4) return smallNumRead(str, digitCN)
   const wanPart = str.substring(0, len - 4)
@@ -122,7 +113,6 @@ function smallNumRead(str: string, digitCN: string[], noLeading = false): string
     if (d === 0) {
       if (hasNonZero && !result.endsWith('零')) result += '零'
     } else {
-      // 10-19 时"一十"可简化为"十"（仅在 noLeading 时）
       if (d === 1 && unitIdx === 1 && (noLeading || str.length === 2 && i === 0)) {
         result += '十'
       } else {
@@ -135,61 +125,42 @@ function smallNumRead(str: string, digitCN: string[], noLeading = false): string
   return result
 }
 
-// ===== Unit 2: 公顷和平方千米 =====
-function genArea(d: Difficulty): MathQuestion {
-  const type = randInt(0, 2)
-  if (type === 0) {
-    // 平方米 → 公顷
-    const sqm = randInt(1, 99) * 10000
-    return { content: `${sqm.toLocaleString()} 平方米 = ______ 公顷`, answer: String(sqm / 10000), type: '面积换算', unit: 2 }
-  } else if (type === 1) {
-    // 公顷 → 平方千米
-    const ha = randInt(1, 99) * 100
-    return { content: `${ha} 公顷 = ______ 平方千米`, answer: String(ha / 100), type: '面积换算', unit: 2 }
-  } else {
-    // 平方千米 → 公顷
-    const km = randInt(1, 99)
-    return { content: `${km} 平方千米 = ______ 公顷`, answer: String(km * 100), type: '面积换算', unit: 2 }
-  }
-}
-
-// ===== Unit 3: 角的度量 =====
+// ===== Unit 2: 角的度量 =====
 function genAngle(d: Difficulty): MathQuestion {
   const type = randInt(0, 3)
   if (type === 0) {
     // 判断角类型
     const angle = pick([30, 45, 60, 89, 90, 91, 120, 135, 150, 175, 180, 270, 360])
     const typeStr = angle < 90 ? '锐角' : angle === 90 ? '直角' : angle < 180 ? '钝角' : angle === 180 ? '平角' : angle === 360 ? '周角' : '钝角'
-    return { content: `${angle}° 是什么角？`, answer: typeStr, type: '角的分类', unit: 3 }
+    return { content: `${angle}° 是什么角？`, answer: typeStr, type: '角的分类', unit: 2 }
   } else if (type === 1) {
     // 角度计算
     const a = pick([30, 45, 60, 90])
     const mult = randInt(2, 5)
     const result = a * mult
     const typeStr = result < 90 ? '锐角' : result === 90 ? '直角' : result < 180 ? '钝角' : result === 180 ? '平角' : '周角'
-    return { content: `${a}° × ${mult} = ______°（______角）`, answer: `${result}、${typeStr}`, type: '角度计算', unit: 3 }
+    return { content: `${a}° × ${mult} = ______°（______角）`, answer: `${result}、${typeStr}`, type: '角度计算', unit: 2 }
   } else if (type === 2) {
     // 钟面角度
     const hour = randInt(1, 12)
-    // 整点时针分针夹角 = hour * 30 (12点=0)
     const angle = hour === 12 ? 0 : hour * 30
     const typeStr = angle === 0 ? '周角' : angle < 90 ? '锐角' : angle === 90 ? '直角' : angle < 180 ? '钝角' : '平角'
-    return { content: `钟面 ${hour} 时整，时针与分针成______角`, answer: typeStr, type: '钟面角', unit: 3 }
+    return { content: `钟面 ${hour} 时整，时针与分针成______角`, answer: typeStr, type: '钟面角', unit: 2 }
   } else {
     // 周角/平角/直角关系
     const q = randInt(1, 3)
-    return { content: `${q} 个平角 = ______°`, answer: String(q * 180), type: '角的关系', unit: 3 }
+    return { content: `${q} 个平角 = ______°`, answer: String(q * 180), type: '角的关系', unit: 2 }
   }
 }
 
-// ===== Unit 4: 三位数乘两位数 =====
+// ===== Unit 3: 多位数乘两位数 =====
 function genMultiply(d: Difficulty): MathQuestion {
   const type = randInt(0, 2)
   if (type === 0) {
-    // 三位数 × 两位数
+    // 多位数 × 两位数
     const a = d === 1 ? randInt(100, 300) : d === 2 ? randInt(100, 500) : randInt(100, 999)
     const b = d === 1 ? randInt(10, 30) : d === 2 ? randInt(12, 50) : randInt(12, 99)
-    return { content: `${a} × ${b}`, answer: String(a * b), type: '三位数乘两位数', unit: 4 }
+    return { content: `${a} × ${b}`, answer: String(a * b), type: '多位数乘两位数', unit: 3 }
   } else if (type === 1) {
     // 积的变化规律
     const base = randInt(12, 50)
@@ -199,7 +170,7 @@ function genMultiply(d: Difficulty): MathQuestion {
       content: `已知 ${base} × ${mult} = ${base * mult}，则 ${base} × ${mult * factor} = ______`,
       answer: String(base * mult * factor),
       type: '积的变化规律',
-      unit: 4,
+      unit: 3,
     }
   } else {
     // 估算
@@ -211,37 +182,48 @@ function genMultiply(d: Difficulty): MathQuestion {
       content: `${a} × ${b} ≈ ______（估算）`,
       answer: String(aR * bR),
       type: '乘法估算',
-      unit: 4,
+      unit: 3,
     }
   }
 }
 
-// ===== Unit 6: 除数是两位数的除法 =====
-function genDivision(d: Difficulty): MathQuestion {
-  const type = randInt(0, 2)
+// ===== Unit 4: 加法模型和乘法模型 =====
+function genModel(d: Difficulty): MathQuestion {
+  const type = randInt(0, 3)
   if (type === 0) {
-    // 口算除法（整十数）
-    const { dividend, divisor, quotient } = genDiv(
-      d === 1 ? 10 : 20, d === 1 ? 50 : 90, d === 1 ? 2 : 3, d === 1 ? 9 : 9
-    )
-    return { content: `${dividend} ÷ ${divisor}`, answer: String(quotient), type: '口算除法', unit: 6 }
+    // 加法模型：总量=分量+分量
+    const a = randInt(50, 500)
+    const b = randInt(50, 500)
+    return { content: `加法模型：${a} + ${b} = ______`, answer: String(a + b), type: '加法模型', unit: 4 }
   } else if (type === 1) {
-    // 笔算除法
-    const { dividend, divisor, quotient } = genDiv(
-      d === 1 ? 11 : 21, d === 1 ? 30 : 99, 2, d === 3 ? 9 : 7
-    )
-    return { content: `${dividend} ÷ ${divisor}`, answer: String(quotient), type: '笔算除法', unit: 6 }
+    // 乘法模型一：总价=单价×数量
+    const price = randInt(5, 50)
+    const qty = randInt(2, 20)
+    return { content: `总价模型：单价${price}元 × 数量${qty}个 = ______元`, answer: String(price * qty), type: '总价模型', unit: 4 }
+  } else if (type === 2) {
+    // 乘法模型二：路程=速度×时间
+    const speed = randInt(60, 120)
+    const time = randInt(2, 8)
+    return { content: `路程模型：速度${speed}千米/时 × 时间${time}小时 = ______千米`, answer: String(speed * time), type: '路程模型', unit: 4 }
   } else {
-    // 有余数除法
-    const divisor = randInt(11, 50)
-    const quotient = randInt(3, 20)
-    const remainder = randInt(1, divisor - 1)
-    const dividend = divisor * quotient + remainder
-    return {
-      content: `${dividend} ÷ ${divisor} = ______ 余 ______`,
-      answer: `${quotient} 余 ${remainder}`,
-      type: '有余数除法',
-      unit: 6,
+    // 求分量/单价/速度
+    const subType = randInt(0, 2)
+    if (subType === 0) {
+      const total = randInt(100, 500)
+      const part = randInt(20, total - 1)
+      return { content: `分量=总量-分量：${total} - ${part} = ______`, answer: String(total - part), type: '加法模型逆运算', unit: 4 }
+    } else if (subType === 1) {
+      const total = randInt(100, 500)
+      const qty = randInt(2, 20)
+      const price = Math.floor(total / qty)
+      const actualTotal = price * qty
+      return { content: `单价=总价÷数量：${actualTotal}元 ÷ ${qty}个 = ______元/个`, answer: String(price), type: '总价模型变式', unit: 4 }
+    } else {
+      const distance = randInt(120, 720)
+      const time = randInt(2, 8)
+      const speed = Math.floor(distance / time)
+      const actualDistance = speed * time
+      return { content: `速度=路程÷时间：${actualDistance}千米 ÷ ${time}小时 = ______千米/时`, answer: String(speed), type: '路程模型变式', unit: 4 }
     }
   }
 }
@@ -252,28 +234,25 @@ function genMixedOp(d: Difficulty): MathQuestion {
   if (type === 0) {
     // a + b - c
     const a = randInt(100, 999), b = randInt(100, 999), c = randInt(10, a + b)
-    return { content: `${a} + ${b} - ${c}`, answer: String(a + b - c), type: '加减混合', unit: 4 }
+    return { content: `${a} + ${b} - ${c}`, answer: String(a + b - c), type: '加减混合', unit: 3 }
   } else if (type === 1) {
     // a × b + c
     const a = randInt(2, 9), b = randInt(10, 99), c = randInt(10, 99)
-    return { content: `${a} × ${b} + ${c}`, answer: String(a * b + c), type: '乘加混合', unit: 4 }
+    return { content: `${a} × ${b} + ${c}`, answer: String(a * b + c), type: '乘加混合', unit: 3 }
   } else if (type === 2) {
     // a × b - c
     const a = randInt(2, 9), b = randInt(10, 99)
     const c = randInt(10, a * b - 1)
-    return { content: `${a} × ${b} - ${c}`, answer: String(a * b - c), type: '乘减混合', unit: 4 }
+    return { content: `${a} × ${b} - ${c}`, answer: String(a * b - c), type: '乘减混合', unit: 3 }
   } else if (type === 3) {
-    // a ÷ b × c
-    const { dividend, divisor, quotient } = genDiv(11, 30, 2, 9)
-    const c = randInt(2, 9)
-    return { content: `${dividend} ÷ ${divisor} × ${c}`, answer: String(quotient * c), type: '除乘混合', unit: 6 }
+    // 总价模型综合
+    const price1 = randInt(5, 30), qty1 = randInt(2, 10)
+    const price2 = randInt(5, 30), qty2 = randInt(2, 10)
+    return { content: `买${qty1}个${price1}元的和${qty2}个${price2}元的，共多少元？`, answer: String(price1 * qty1 + price2 * qty2), type: '总价综合', unit: 4 }
   } else {
-    // (a + b) ÷ c
-    const c = randInt(2, 9)
-    const b = randInt(1, 9)
-    const quotient = randInt(5, 20)
-    const a = quotient * c - b
-    return { content: `(${a} + ${b}) ÷ ${c}`, answer: String(quotient), type: '带括号混合', unit: 6 }
+    // 路程模型综合
+    const speed = randInt(60, 100), time1 = randInt(2, 4), time2 = randInt(2, 4)
+    return { content: `以${speed}千米/时先走${time1}小时，再走${time2}小时，共行多少千米？`, answer: String(speed * (time1 + time2)), type: '路程综合', unit: 4 }
   }
 }
 
@@ -293,21 +272,22 @@ function genBasicCalc(d: Difficulty): MathQuestion {
     const b = randInt(2, d === 1 ? 9 : 20)
     return { content: `${a} × ${b}`, answer: String(a * b), type: '乘法', unit: 0 }
   } else {
-    const { dividend, divisor, quotient } = genDiv(d === 1 ? 2 : 10, d === 1 ? 9 : 50, 2, 9)
+    const divisor = randInt(2, d === 1 ? 9 : 50)
+    const quotient = randInt(2, 9)
+    const dividend = divisor * quotient
     return { content: `${dividend} ÷ ${divisor}`, answer: String(quotient), type: '除法', unit: 0 }
   }
 }
 
 // ===== 主生成函数 =====
-export type CalcCategory = 'mixed' | 'bigNum' | 'area' | 'angle' | 'multiply' | 'division' | 'mixedOp'
+export type CalcCategory = 'mixed' | 'bigNum' | 'angle' | 'multiply' | 'model' | 'mixedOp'
 
 export const categoryConfig: { key: CalcCategory; label: string; icon: string }[] = [
   { key: 'mixed', label: '综合口算', icon: 'apps-o' },
-  { key: 'bigNum', label: '大数认识', icon: 'newspaper-o' },
-  { key: 'area', label: '面积换算', icon: 'fire-o' },
+  { key: 'bigNum', label: '万以上数的认识', icon: 'newspaper-o' },
   { key: 'angle', label: '角的度量', icon: 'aim' },
   { key: 'multiply', label: '乘法运算', icon: 'cross' },
-  { key: 'division', label: '除法运算', icon: 'divide' },
+  { key: 'model', label: '数量模型', icon: 'balance-o' },
   { key: 'mixedOp', label: '混合运算', icon: 'exchange' },
 ]
 
@@ -318,17 +298,15 @@ export function generateQuestions(
 ): MathQuestion[] {
   const generators: Record<CalcCategory, () => MathQuestion> = {
     mixed: () => {
-      // 综合模式：随机从各类型抽取，基础口算占比稍高
-      const r = randInt(0, 6)
+      const r = randInt(0, 5)
       if (r === 0) return genBasicCalc(difficulty)
-      const map: CalcCategory[] = ['bigNum', 'area', 'angle', 'multiply', 'division', 'mixedOp']
+      const map: CalcCategory[] = ['bigNum', 'angle', 'multiply', 'model', 'mixedOp']
       return generators[map[r - 1]]()
     },
     bigNum: () => genBigNumber(difficulty),
-    area: () => genArea(difficulty),
     angle: () => genAngle(difficulty),
     multiply: () => genMultiply(difficulty),
-    division: () => genDivision(difficulty),
+    model: () => genModel(difficulty),
     mixedOp: () => genMixedOp(difficulty),
   }
 
@@ -339,14 +317,12 @@ export function generateQuestions(
   while (questions.length < count && attempts < count * 5) {
     attempts++
     const q = generators[category]()
-    // 去重
     if (!seen.has(q.content)) {
       seen.add(q.content)
       questions.push(q)
     }
   }
 
-  // 打乱顺序
   for (let i = questions.length - 1; i > 0; i--) {
     const j = randInt(0, i)
     ;[questions[i], questions[j]] = [questions[j], questions[i]]

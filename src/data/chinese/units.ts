@@ -43,26 +43,23 @@ export const chineseUnits: UnitItem[] = [
       },
       {
         id: 2,
-        title: '走月亮',
+        title: '繁星',
         previewContent: {
-          guide: '在月光下行走是什么感受？读课文感受月夜景色美好。',
-          keyPoints: ['体会月下漫步温馨', '学习感官描写', '感受亲情之美'],
+          guide: '巴金笔下三次看星空有什么不同感受？',
+          keyPoints: ['三次看星空', '情景交融', '联想与想象'],
           audioUrl: '',
-          newWords: [
-            { word: '淘', pinyin: 'táo', meaning: '淘洗', phrases: ['淘洗', '淘气'] },
-            { word: '牵', pinyin: 'qiān', meaning: '拉', phrases: ['牵手'] },
-            { word: '鹅', pinyin: 'é', meaning: '家禽', phrases: ['鹅卵石'] },
-          ],
+          newWords: [{ word: '昧', pinyin: 'mèi', meaning: '昏暗', phrases: ['半明半昧'] }, { word: '坠', pinyin: 'zhuì', meaning: '落下', phrases: ['坠落'] }],
         },
         reviewContent: {
-          knowledgeMap: [
-            { title: '描写方法', content: '视觉、听觉、嗅觉多感官描写月夜' },
-            { title: '情感主线', content: '母子亲情，温馨美好' },
-          ],
-          keyPoints: ['多感官描写', '月夜景色', '母子情深'],
-          commonMistakes: ['"鹅卵石"不要写成"娥卵石"'],
+          knowledgeMap: [{ title: '三次看星空', content: '从前庭院→三年前南京→如今海上', children: [
+            { title: '从前', content: '密密麻麻如回母亲怀里' },
+            { title: '三年前', content: '星群密布如与朋友对话' },
+            { title: '如今', content: '半明半昧如摇摇欲坠' },
+          ]}],
+          keyPoints: ['时间顺序', '不同时期不同感受', '情景交融'],
+          commonMistakes: ['作者是巴金'],
           exercises: [
-            { id: 'cn-1-2-1', subject: 'chinese', unit: 1, lesson: 2, type: 'choice', difficulty: 1, content: '《走月亮》主要表达什么情感？', options: ['思乡', '母子亲情', '自然之美', '童年回忆'], answer: '母子亲情', analysis: '通过走月亮表达母子温馨亲情。', knowledgePoints: ['文章情感'] },
+            { id: 'cn-1-2-1', subject: 'chinese', unit: 1, lesson: 2, type: 'choice', difficulty: 1, content: '《繁星》的作者是？', options: ['冰心', '巴金', '老舍', '鲁迅'], answer: '巴金', analysis: '巴金，现代著名作家。', knowledgePoints: ['文学常识'] },
           ],
         },
       },
@@ -84,28 +81,6 @@ export const chineseUnits: UnitItem[] = [
           ],
         },
       },
-      {
-        id: 4,
-        title: '繁星',
-        previewContent: {
-          guide: '巴金笔下三次看星空有什么不同感受？',
-          keyPoints: ['三次看星空', '情景交融', '联想与想象'],
-          audioUrl: '',
-          newWords: [{ word: '昧', pinyin: 'mèi', meaning: '昏暗', phrases: ['半明半昧'] }, { word: '坠', pinyin: 'zhuì', meaning: '落下', phrases: ['坠落'] }],
-        },
-        reviewContent: {
-          knowledgeMap: [{ title: '三次看星空', content: '从前庭院→三年前南京→如今海上', children: [
-            { title: '从前', content: '密密麻麻如回母亲怀里' },
-            { title: '三年前', content: '星群密布如与朋友对话' },
-            { title: '如今', content: '半明半昧如摇摇欲坠' },
-          ]}],
-          keyPoints: ['时间顺序', '不同时期不同感受', '情景交融'],
-          commonMistakes: ['作者是巴金'],
-          exercises: [
-            { id: 'cn-1-4-1', subject: 'chinese', unit: 1, lesson: 4, type: 'choice', difficulty: 1, content: '《繁星》的作者是？', options: ['冰心', '巴金', '老舍', '鲁迅'], answer: '巴金', analysis: '巴金，现代著名作家。', knowledgePoints: ['文学常识'] },
-          ],
-        },
-      },
     ],
   },
   {
@@ -120,7 +95,7 @@ export const chineseUnits: UnitItem[] = [
         ]},
       },
       {
-        id: 2, title: '蝙蝠和雷达',
+        id: 2, title: '夜间飞行的秘密',
         previewContent: { guide: '蝙蝠夜间飞行靠什么？科学家怎么发现的？', keyPoints: ['科学小品文', '仿生学', '实验方法'], audioUrl: '', newWords: [{ word: '蝠', pinyin: 'fú', meaning: '蝙蝠', phrases: ['蝙蝠'] }, { word: '锐', pinyin: 'ruì', meaning: '锋利', phrases: ['敏锐'] }] },
         reviewContent: { knowledgeMap: [{ title: '三次实验', content: '蒙眼→灵活；塞耳→乱撞；封嘴→乱撞', children: [{ title: '结论', content: '蝙蝠靠嘴和耳朵配合探路' }] }, { title: '仿生学', content: '雷达原理来自蝙蝠探路' }], keyPoints: ['三次实验', '超声波原理', '雷达与蝙蝠联系'], commonMistakes: ['蝙蝠不靠眼睛夜间飞行'], exercises: [
           { id: 'cn-2-2-1', subject: 'chinese', unit: 2, lesson: 2, type: 'choice', difficulty: 2, content: '蝙蝠夜间飞行靠什么探路？', options: ['眼睛', '嘴和耳朵', '翅膀', '尾巴'], answer: '嘴和耳朵', analysis: '靠嘴发超声波耳朵接收回声探路。', knowledgePoints: ['课文内容'] },
@@ -128,16 +103,18 @@ export const chineseUnits: UnitItem[] = [
         ]},
       },
       {
-        id: 3, title: '呼风唤雨的世纪',
-        previewContent: { guide: '20世纪有哪些科技发明改变了生活？', keyPoints: ['科技发展', '对比今昔', '说明方法'], audioUrl: '', newWords: [{ word: '哲', pinyin: 'zhé', meaning: '智慧', phrases: ['哲学'] }, { word: '赖', pinyin: 'lài', meaning: '依靠', phrases: ['依赖'] }] },
-        reviewContent: { knowledgeMap: [{ title: '中心', content: '20世纪科技飞速发展，人类呼风唤雨' }, { title: '说明方法', content: '作比较、举例子' }], keyPoints: ['科技改变生活', '作比较说明', '20世纪成就'], commonMistakes: ['"忽如一夜春风来"引用自岑参'], exercises: [
-          { id: 'cn-2-3-1', subject: 'chinese', unit: 2, lesson: 3, type: 'fill', difficulty: 1, content: '20世纪是一个______的世纪。', answer: '呼风唤雨', analysis: '科技发达如呼风唤雨。', knowledgePoints: ['课文内容'] },
+        id: 3, title: '方帽子店',
+        previewContent: { guide: '为什么方帽子店最后没有顾客了？学会从不同角度提问。', keyPoints: ['阅读策略：提问', '创新与守旧', '对比手法'], audioUrl: '', newWords: [{ word: '嚷', pinyin: 'rǎng', meaning: '喊叫', phrases: ['嚷嚷'] }] },
+        reviewContent: { knowledgeMap: [{ title: '故事内容', content: '方帽子店只卖方帽子，孩子们做了圆帽子，最后圆帽子受欢迎方帽子被淘汰' }, { title: '道理', content: '要敢于创新，不能因循守旧' }], keyPoints: ['创新与守旧对比', '提问策略', '新旧事物更替'], commonMistakes: ['方帽子代表守旧，圆帽子代表创新'], exercises: [
+          { id: 'cn-2-3-1', subject: 'chinese', unit: 2, lesson: 3, type: 'choice', difficulty: 1, content: '方帽子店最后为什么没有顾客了？', options: ['帽子太贵', '人们不喜欢方帽子了', '店关门了', '帽子质量差'], answer: '人们不喜欢方帽子了', analysis: '圆帽子更舒适，方帽子被淘汰。', knowledgePoints: ['课文内容'] },
         ]},
       },
       {
-        id: 4, title: '蝴蝶的家',
-        previewContent: { guide: '下雨时蝴蝶躲在哪？感受对生命的关爱。', keyPoints: ['关爱生命', '观察思考', '疑问句'], audioUrl: '', newWords: [{ word: '撼', pinyin: 'hàn', meaning: '摇动', phrases: ['震撼'] }, { word: '雀', pinyin: 'què', meaning: '小鸟', phrases: ['麻雀'] }] },
-        reviewContent: { knowledgeMap: [{ title: '情感', content: '对蝴蝶的关心担忧' }, { title: '写法', content: '反复提问表达关切' }], keyPoints: ['关爱小生命', '疑问句运用', '心理描写'], commonMistakes: ['文章未给出蝴蝶家的确定答案'], exercises: [] },
+        id: 4, title: '田忌赛马',
+        previewContent: { guide: '田忌怎么用策略赢得赛马？学会从不同角度提问。', keyPoints: ['阅读策略：提问', '策略智慧', '孙膑'], audioUrl: '', newWords: [{ word: '忌', pinyin: 'jì', meaning: '嫉妒；禁忌', phrases: ['田忌'] }, { word: '膑', pinyin: 'bìn', meaning: '膝盖骨', phrases: ['孙膑'] }] },
+        reviewContent: { knowledgeMap: [{ title: '赛马策略', content: '田忌用下等马对齐王上等马（输），上等马对中等马（赢），中等马对下等马（赢）', children: [{ title: '结果', content: '三局两胜，田忌赢了' }] }, { title: '孙膑', content: '观察发现马的实力相差不大，用策略取胜' }], keyPoints: ['策略思维', '扬长避短', '孙膑的智慧'], commonMistakes: ['孙膑是军事家，田忌是齐国将军'], exercises: [
+          { id: 'cn-2-4-1', subject: 'chinese', unit: 2, lesson: 4, type: 'choice', difficulty: 2, content: '田忌赛马中，孙膑的策略核心是？', options: ['换最快的马', '调整出场顺序', '放弃比赛', '增加马匹'], answer: '调整出场顺序', analysis: '用下对上、上对中、中对下，三局两胜。', knowledgePoints: ['课文内容'] },
+        ]},
       },
     ],
   },
@@ -222,20 +199,61 @@ export const chineseUnits: UnitItem[] = [
   },
   {
     id: 6,
-    title: '第六单元 · 童年生活',
+    title: '第六单元 · 中国文化',
     lessons: [
-      { id: 1, title: '牛和鹅', previewContent: { guide: '为什么看牛和鹅角度不同态度不同？', keyPoints: ['多角度看问题', '换位思考', '童年趣事'], audioUrl: '', newWords: [{ word: '跪', pinyin: 'guì', meaning: '屈膝', phrases: ['跪下'] }] }, reviewContent: { knowledgeMap: [{ title: '道理', content: '角度不同看法不同' }], keyPoints: ['换角度思考', '金奎叔的话'], commonMistakes: ['怕鹅因为鹅会咬人'], exercises: [] } },
-      { id: 2, title: '一只窝囊的大老虎', previewContent: { guide: '为什么老虎"窝囊"？感受童年天真。', keyPoints: ['童年趣事', '人物心理', '演出经历'], audioUrl: '', newWords: [{ word: '囊', pinyin: 'náng', meaning: '口袋', phrases: ['窝囊'] }] }, reviewContent: { knowledgeMap: [{ title: '梗概', content: '扮演老虎不会豁虎跳被笑但认真完成' }], keyPoints: ['童年演出', '心理描写', '认真就好'], commonMistakes: ['"窝囊"读nang轻声'], exercises: [] } },
-      { id: 3, title: '陀螺', previewContent: { guide: '陀螺怎么玩？体会到什么道理？', keyPoints: ['童年玩具', '人不可貌相', '高洪波'], audioUrl: '', newWords: [{ word: '帅', pinyin: 'shuài', meaning: '英俊', phrases: ['元帅'] }] }, reviewContent: { knowledgeMap: [{ title: '中心句', content: '人不可貌相，海水不可斗量' }], keyPoints: ['陀螺游戏', '人不可貌相', '童年乐趣'], commonMistakes: ['"人不可貌相"是俗语'], exercises: [] } },
+      {
+        id: 1, title: '长城',
+        previewContent: { guide: '长城有什么特点？感受中国古代建筑的伟大。', keyPoints: ['长城结构', '劳动人民智慧', '爱国主义'], audioUrl: '', newWords: [{ word: '崇', pinyin: 'chóng', meaning: '高', phrases: ['崇山峻岭'] }, { word: '峻', pinyin: 'jùn', meaning: '高陡', phrases: ['陡峻'] }] },
+        reviewContent: { knowledgeMap: [{ title: '长城特点', content: '长（蜿蜒万里）、高大坚固、设计巧妙（垛子、瞭望口、射口、城台）' }, { title: '情感', content: '赞叹劳动人民智慧和毅力，民族自豪感' }], keyPoints: ['长城的构造', '劳动人民智慧', '民族自豪感'], commonMistakes: ['长城不是一个人建的，是千百万劳动人民建的'], exercises: [
+          { id: 'cn-6-1-1', subject: 'chinese', unit: 6, lesson: 1, type: 'choice', difficulty: 1, content: '长城建在什么地方？', options: ['平原', '崇山峻岭之间', '海边', '沙漠'], answer: '崇山峻岭之间', analysis: '长城顺着山势而建。', knowledgePoints: ['课文内容'] },
+        ]},
+      },
+      {
+        id: 2, title: '颐和园',
+        previewContent: { guide: '颐和园有哪些著名景观？感受皇家园林的美。', keyPoints: ['游览顺序', '景物描写', '皇家园林'], audioUrl: '', newWords: [{ word: '殿', pinyin: 'diàn', meaning: '宫殿', phrases: ['大殿'] }, { word: '廊', pinyin: 'láng', meaning: '走廊', phrases: ['长廊'] }] },
+        reviewContent: { knowledgeMap: [{ title: '游览路线', content: '长廊→万寿山→佛香阁→昆明湖→十七孔桥', children: [{ title: '长廊', content: '全长700多米，画有彩绘' }, { title: '佛香阁', content: '颐和园标志建筑' }] }, { title: '写法', content: '按游览顺序写，移步换景' }], keyPoints: ['游览顺序写景', '移步换景', '颐和园景观'], commonMistakes: ['按游览路线写景要注意方位变化'], exercises: [
+          { id: 'cn-6-2-1', subject: 'chinese', unit: 6, lesson: 2, type: 'choice', difficulty: 1, content: '《颐和园》的写作顺序是？', options: ['时间顺序', '游览顺序', '空间顺序', '逻辑顺序'], answer: '游览顺序', analysis: '按游览路线移步换景。', knowledgePoints: ['文章结构'] },
+        ]},
+      },
+      {
+        id: 3, title: '秦兵马俑',
+        previewContent: { guide: '秦兵马俑有什么特点？感受古代雕塑艺术。', keyPoints: ['兵马俑规模', '雕塑艺术', '历史文化遗产'], audioUrl: '', newWords: [{ word: '俑', pinyin: 'yǒng', meaning: '陪葬塑像', phrases: ['兵马俑'] }, { word: '瞰', pinyin: 'kàn', meaning: '俯视', phrases: ['鸟瞰'] }] },
+        reviewContent: { knowledgeMap: [{ title: '规模宏大', content: '三个坑，总面积近20000平方米，8000个兵马俑' }, { title: '类型众多', content: '将军俑、武士俑、骑兵俑、车兵俑等', children: [{ title: '个性鲜明', content: '每个兵马俑神态各异' }] }], keyPoints: ['规模宏大', '类型众多', '个性鲜明', '世界文化遗产'], commonMistakes: ['秦兵马俑是秦始皇的陪葬品'], exercises: [
+          { id: 'cn-6-3-1', subject: 'chinese', unit: 6, lesson: 3, type: 'choice', difficulty: 1, content: '秦兵马俑是哪个皇帝的陪葬品？', options: ['汉武帝', '秦始皇', '唐太宗', '明太祖'], answer: '秦始皇', analysis: '秦始皇陵兵马俑。', knowledgePoints: ['历史常识'] },
+        ]},
+      },
     ],
   },
   {
     id: 7,
-    title: '第七单元 · 家国情怀',
+    title: '第七单元 · 童年生活',
+    lessons: [
+      { id: 1, title: '牛和鹅', previewContent: { guide: '为什么看牛和鹅角度不同态度不同？', keyPoints: ['多角度看问题', '换位思考', '童年趣事'], audioUrl: '', newWords: [{ word: '跪', pinyin: 'guì', meaning: '屈膝', phrases: ['跪下'] }] }, reviewContent: { knowledgeMap: [{ title: '道理', content: '角度不同看法不同' }], keyPoints: ['换角度思考', '金奎叔的话'], commonMistakes: ['怕鹅因为鹅会咬人'], exercises: [] } },
+      { id: 2, title: '一只窝囊的大老虎', previewContent: { guide: '为什么老虎"窝囊"？感受童年天真。', keyPoints: ['童年趣事', '人物心理', '演出经历'], audioUrl: '', newWords: [{ word: '囊', pinyin: 'náng', meaning: '口袋', phrases: ['窝囊'] }] }, reviewContent: { knowledgeMap: [{ title: '梗概', content: '扮演老虎不会豁虎跳被笑但认真完成' }], keyPoints: ['童年演出', '心理描写', '认真就好'], commonMistakes: ['"窝囊"读nang轻声'], exercises: [] } },
+      { id: 3, title: '陀螺', previewContent: { guide: '陀螺怎么玩？体会到什么道理？', keyPoints: ['童年玩具', '人不可貌相', '高洪波'], audioUrl: '', newWords: [{ word: '帅', pinyin: 'shuài', meaning: '英俊', phrases: ['元帅'] }] }, reviewContent: { knowledgeMap: [{ title: '中心句', content: '人不可貌相，海水不可斗量' }], keyPoints: ['陀螺游戏', '人不可貌相', '童年乐趣'], commonMistakes: ['"人不可貌相"是俗语'], exercises: [] } },
+      { id: 4, title: '王戎不取道旁李', previewContent: { guide: '王戎为什么不取道旁李？', keyPoints: ['文言文', '观察思考', '《世说新语》'], audioUrl: '', newWords: [{ word: '戎', pinyin: 'róng', meaning: '姓氏', phrases: ['王戎'] }] }, reviewContent: { knowledgeMap: [{ title: '故事', content: '道旁李树多子折枝，诸儿竞取，唯戎不动，答曰"树在道边而多子，此必苦李"' }, { title: '道理', content: '善于观察思考' }], keyPoints: ['文言文理解', '观察思考', '《世说新语》'], commonMistakes: ['王戎是"竹林七贤"之一'], exercises: [
+        { id: 'cn-7-4-1', subject: 'chinese', unit: 7, lesson: 4, type: 'choice', difficulty: 2, content: '王戎认为道旁李子是苦的原因是？', options: ['李子还没熟', '树在道边多子必苦李', '李子有毒', '别人摘过了'], answer: '树在道边多子必苦李', analysis: '王戎推理：如果在路边且果多没人摘，一定是苦的。', knowledgePoints: ['课文内容'] },
+      ]} },
+    ],
+  },
+  {
+    id: 8,
+    title: '第八单元 · 家国情怀',
     lessons: [
       {
-        id: 1, title: '古诗三首',
-        previewContent: { guide: '《出塞》《凉州词》《夏日绝句》表达怎样家国情怀？', keyPoints: ['边塞诗', '家国情怀', '古诗必背'], audioUrl: '', newWords: [{ word: '塞', pinyin: 'sài', meaning: '边塞', phrases: ['出塞'] }, { word: '征', pinyin: 'zhēng', meaning: '出征', phrases: ['出征'] }] },
+        id: 1, title: '我将无我，不负人民',
+        previewContent: { guide: '"我将无我，不负人民"表达了怎样的情怀？', keyPoints: ['家国情怀', '无私奉献', '责任担当'], audioUrl: '', newWords: [{ word: '负', pinyin: 'fù', meaning: '辜负', phrases: ['不负'] }] },
+        reviewContent: { knowledgeMap: [{ title: '中心思想', content: '表达了为人民利益可以牺牲个人一切的崇高情怀' }, { title: '理解', content: '"无我"就是忘我，把人民放在心中最高位置' }], keyPoints: ['家国情怀', '无私奉献精神', '责任与担当'], commonMistakes: ['"无我"不是没有自己，是忘我为人民'], exercises: [
+          { id: 'cn-8-1-1', subject: 'chinese', unit: 8, lesson: 1, type: 'choice', difficulty: 1, content: '"我将无我"中"无我"的意思是？', options: ['没有自己', '忘记自己，一心为人民', '不要自己', '不认识自己'], answer: '忘记自己，一心为人民', analysis: '"无我"是忘我的奉献精神。', knowledgePoints: ['课文理解'] },
+        ]},
+      },
+      { id: 2, title: '为中华之崛起而读书', previewContent: { guide: '周恩来为什么立下这个志向？', keyPoints: ['家国情怀', '立志', '周恩来'], audioUrl: '', newWords: [{ word: '崛', pinyin: 'jué', meaning: '突起', phrases: ['崛起'] }] }, reviewContent: { knowledgeMap: [{ title: '背景', content: '少年周恩来目睹中国人在租界受欺' }, { title: '志向', content: '为中华之崛起而读书' }], keyPoints: ['立志报国', '周恩来少年故事'], commonMistakes: ['"崛起"读jué不是qū'], exercises: [
+        { id: 'cn-8-2-1', subject: 'chinese', unit: 8, lesson: 2, type: 'fill', difficulty: 1, content: '周恩来立下的志向是：为______而读书。', answer: '中华之崛起', analysis: '为中华之崛起而读书——周恩来。', knowledgePoints: ['课文内容'] },
+      ]} },
+      { id: 3, title: '延安，我把你追寻', previewContent: { guide: '为什么要追寻延安精神？', keyPoints: ['延安精神', '诗歌', '追寻理想'], audioUrl: '', newWords: [{ word: '延', pinyin: 'yán', meaning: '延长', phrases: ['延安'] }] }, reviewContent: { knowledgeMap: [{ title: '延安精神', content: '自力更生、艰苦奋斗' }], keyPoints: ['延安精神', '诗歌形式'], commonMistakes: ['延安在陕西省'], exercises: [] } },
+      {
+        id: 4, title: '古诗三首',
+        previewContent: { guide: '《凉州词》《出塞》《夏日绝句》表达怎样家国情怀？', keyPoints: ['边塞诗', '家国情怀', '古诗必背'], audioUrl: '', newWords: [{ word: '塞', pinyin: 'sài', meaning: '边塞', phrases: ['出塞'] }, { word: '征', pinyin: 'zhēng', meaning: '出征', phrases: ['出征'] }] },
         reviewContent: {
           knowledgeMap: [
             { title: '《出塞》', content: '王昌龄，怀念飞将军李广', children: [{ title: '名句', content: '但使龙城飞将在，不教胡马度阴山' }] },
@@ -245,27 +263,12 @@ export const chineseUnits: UnitItem[] = [
           keyPoints: ['三首必背', '家国情怀', '边塞诗特点'],
           commonMistakes: ['《夏日绝句》作者李清照不是李白'],
           exercises: [
-            { id: 'cn-7-1-1', subject: 'chinese', unit: 7, lesson: 1, type: 'fill', difficulty: 1, content: '生当作人杰，______。', answer: '死亦为鬼雄', analysis: '李清照《夏日绝句》。', knowledgePoints: ['古诗默写'] },
-            { id: 'cn-7-1-2', subject: 'chinese', unit: 7, lesson: 1, type: 'fill', difficulty: 1, content: '但使龙城飞将在，______。', answer: '不教胡马度阴山', analysis: '王昌龄《出塞》。', knowledgePoints: ['古诗默写'] },
-            { id: 'cn-7-1-3', subject: 'chinese', unit: 7, lesson: 1, type: 'choice', difficulty: 2, content: '《夏日绝句》赞美了谁？', options: ['刘邦', '项羽', '韩信', '张良'], answer: '项羽', analysis: '李清照赞项羽宁死不渡江。', knowledgePoints: ['古诗理解'] },
+            { id: 'cn-8-4-1', subject: 'chinese', unit: 8, lesson: 4, type: 'fill', difficulty: 1, content: '生当作人杰，______。', answer: '死亦为鬼雄', analysis: '李清照《夏日绝句》。', knowledgePoints: ['古诗默写'] },
+            { id: 'cn-8-4-2', subject: 'chinese', unit: 8, lesson: 4, type: 'fill', difficulty: 1, content: '但使龙城飞将在，______。', answer: '不教胡马度阴山', analysis: '王昌龄《出塞》。', knowledgePoints: ['古诗默写'] },
+            { id: 'cn-8-4-3', subject: 'chinese', unit: 8, lesson: 4, type: 'choice', difficulty: 2, content: '《夏日绝句》赞美了谁？', options: ['刘邦', '项羽', '韩信', '张良'], answer: '项羽', analysis: '李清照赞项羽宁死不渡江。', knowledgePoints: ['古诗理解'] },
           ],
         },
       },
-      { id: 2, title: '为中华之崛起而读书', previewContent: { guide: '周恩来为什么立下这个志向？', keyPoints: ['家国情怀', '立志', '周恩来'], audioUrl: '', newWords: [{ word: '崛', pinyin: 'jué', meaning: '突起', phrases: ['崛起'] }] }, reviewContent: { knowledgeMap: [{ title: '背景', content: '少年周恩来目睹中国人在租界受欺' }, { title: '志向', content: '为中华之崛起而读书' }], keyPoints: ['立志报国', '周恩来少年故事'], commonMistakes: ['"崛起"读jué不是qū'], exercises: [] } },
-      { id: 3, title: '梅兰芳蓄须', previewContent: { guide: '梅兰芳为什么蓄须？体现了什么精神？', keyPoints: ['民族气节', '爱国精神', '梅兰芳'], audioUrl: '', newWords: [{ word: '蓄', pinyin: 'xù', meaning: '留存', phrases: ['蓄须'] }] }, reviewContent: { knowledgeMap: [{ title: '事件', content: '抗日战争期间梅兰芳蓄须明志拒演' }], keyPoints: ['民族气节', '爱国精神'], commonMistakes: ['梅兰芳是京剧大师'], exercises: [] } },
-      { id: 4, title: '延安，我把你追寻', previewContent: { guide: '为什么要追寻延安精神？', keyPoints: ['延安精神', '诗歌', '追寻理想'], audioUrl: '', newWords: [{ word: '延', pinyin: 'yán', meaning: '延长', phrases: ['延安'] }] }, reviewContent: { knowledgeMap: [{ title: '延安精神', content: '自力更生、艰苦奋斗' }], keyPoints: ['延安精神', '诗歌形式'], commonMistakes: ['延安在陕西省'], exercises: [] } },
-    ],
-  },
-  {
-    id: 8,
-    title: '第八单元 · 史书故事',
-    lessons: [
-      { id: 1, title: '王戎不取道旁李', previewContent: { guide: '王戎为什么不取道旁李？', keyPoints: ['文言文', '观察思考', '《世说新语》'], audioUrl: '', newWords: [{ word: '戎', pinyin: 'róng', meaning: '姓氏', phrases: ['王戎'] }] }, reviewContent: { knowledgeMap: [{ title: '故事', content: '道旁李树多子折枝，诸儿竞取，唯戎不动，答曰"树在道边而多子，此必苦李"' }, { title: '道理', content: '善于观察思考' }], keyPoints: ['文言文理解', '观察思考', '《世说新语》'], commonMistakes: ['王戎是"竹林七贤"之一'], exercises: [
-        { id: 'cn-8-1-1', subject: 'chinese', unit: 8, lesson: 1, type: 'choice', difficulty: 2, content: '王戎认为道旁李子是苦的原因是？', options: ['李子还没熟', '树在道边多子必苦李', '李子有毒', '别人摘过了'], answer: '树在道边多子必苦李', analysis: '王戎推理：如果在路边且果多没人摘，一定是苦的。', knowledgePoints: ['课文内容'] },
-      ]} },
-      { id: 2, title: '西门豹治邺', previewContent: { guide: '西门豹怎么惩治巫婆官绅的？', keyPoints: ['历史故事', '破除迷信', '智慧'], audioUrl: '', newWords: [{ word: '豹', pinyin: 'bào', meaning: '动物', phrases: ['西门豹'] }] }, reviewContent: { knowledgeMap: [{ title: '事件', content: '将巫婆投入河中惩治，破除河伯娶妇迷信' }, { title: '人物', content: '西门豹智慧果敢' }], keyPoints: ['破除迷信', '智慧勇敢', '历史故事'], commonMistakes: ['西门豹是战国时期人物'], exercises: [] },
-      },
-      { id: 3, title: '故事二则', previewContent: { guide: '《扁鹊治病》《纪昌学射》讲了什么道理？', keyPoints: ['寓言故事', '防微杜渐', '坚持不懈'], audioUrl: '', newWords: [{ word: '鹊', pinyin: 'què', meaning: '鸟', phrases: ['扁鹊'] }] }, reviewContent: { knowledgeMap: [{ title: '《扁鹊治病》', content: '蔡桓公讳疾忌医，小病变大病' }, { title: '《纪昌学射》', content: '纪昌苦练眼力终成射手' }], keyPoints: ['防微杜渐', '坚持不懈', '寓言道理'], commonMistakes: ['扁鹊是古代名医'], exercises: [] } },
     ],
   },
 ]
