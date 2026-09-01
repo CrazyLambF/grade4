@@ -53,11 +53,16 @@ export const useUserStore = defineStore('user', () => {
   async function updateMultipleUnitProgress(progress: Record<SubjectType, number>) {
     if (userInfo.value) {
       const plain = toPlain(userInfo.value)
+      console.log('[updateMultipleUnitProgress] before:', JSON.stringify(plain.currentUnit), 'applying:', JSON.stringify(progress))
       Object.entries(progress).forEach(([k, v]) => {
         plain.currentUnit[k as SubjectType] = v
       })
+      console.log('[updateMultipleUnitProgress] after:', JSON.stringify(plain.currentUnit))
       await saveUserInfo(plain)
       userInfo.value = plain
+      console.log('[updateMultipleUnitProgress] userInfo.value updated, id =', plain.id)
+    } else {
+      console.warn('[updateMultipleUnitProgress] userInfo.value is null!')
     }
   }
 

@@ -34,12 +34,18 @@ export async function getUserInfo(): Promise<UserInfo | undefined> {
 
 export async function saveUserInfo(info: UserInfo): Promise<number> {
   const raw = toRaw(info)
+  // 如果已有 id，直接用 put 更新（不依赖 getUserInfo 查询，避免多条记录时查到错误的记录）
+  if (raw.id !== undefined) {
+    return await db.userInfo.put(raw)
+  }
+  // 新记录：先查是否有已存在的（兼容旧逻辑）
   const existing = await getUserInfo()
   if (existing && existing.id !== undefined) {
-    // 用 put 完整替换，避免 update/modify 内部的合并操作触发 DataCloneError
     return await db.userInfo.put({ ...raw, id: existing.id })
   }
-  return await db.userInfo.add(raw)
+  // 首次创建
+  const newId = await db.userInfo.add(raw)
+  return newId
 }
 
 // 学习记录操作

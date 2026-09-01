@@ -150,7 +150,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, reactive, computed, onMounted, watch } from 'vue'
 import { showConfirmDialog, showToast } from 'vant'
 import { useUserStore } from '@/stores/user'
 import { useSubjectStore } from '@/stores/subject'
@@ -168,7 +168,7 @@ const streakDays = computed(() => userInfo.value?.streakDays || 0)
 const editName = ref(false)
 const tempName = ref('')
 const showProgressSetting = ref(false)
-const tempProgress = ref<Record<string, number>>({ chinese: 1, math: 1, english: 1, science: 1 })
+const tempProgress = reactive<Record<string, number>>({ chinese: 1, math: 1, english: 1, science: 1 })
 const showAbout = ref(false)
 const showGuide = ref(false)
 const fileInput = ref<HTMLInputElement | null>(null)
@@ -176,7 +176,7 @@ const fileInput = ref<HTMLInputElement | null>(null)
 // 每次打开进度设置弹窗时，同步当前实际进度到 tempProgress
 watch(showProgressSetting, (show) => {
   if (show && userInfo.value) {
-    tempProgress.value = { ...userInfo.value.currentUnit }
+    Object.assign(tempProgress, userInfo.value.currentUnit)
   }
 })
 
@@ -196,10 +196,13 @@ function saveName() {
 async function saveProgress() {
   // 构建完整的进度对象，一次性批量更新（避免逐个 async 调用产生竞态条件）
   const progress = {} as Record<SubjectType, number>
-  Object.entries(tempProgress.value).forEach(([k, v]) => {
+  Object.entries(tempProgress).forEach(([k, v]) => {
     progress[k as SubjectType] = v
   })
+  console.log('[saveProgress] tempProgress:', JSON.stringify(tempProgress))
+  console.log('[saveProgress] progress to save:', JSON.stringify(progress))
   await userStore.updateMultipleUnitProgress(progress)
+  console.log('[saveProgress] after update, userInfo.currentUnit:', JSON.stringify(userStore.userInfo?.currentUnit))
   showProgressSetting.value = false
   showToast('进度已更新')
 }
@@ -259,7 +262,7 @@ onMounted(async () => {
   await userStore.loadUser()
   if (userInfo.value) {
     tempName.value = userInfo.value.name
-    tempProgress.value = { ...userInfo.value.currentUnit }
+    Object.assign(tempProgress, userInfo.value.currentUnit)
   }
 })
 </script>
