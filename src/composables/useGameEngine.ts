@@ -24,7 +24,9 @@ export function useGameEngine() {
   const fb = ref<'correct' | 'wrong' | ''>(''), showRes = ref(false), lastSel = ref(''), fillVal = ref('')
   // 连击特效
   const comboEffect = ref(false)
-  let timer: any = null
+  let timer: ReturnType<typeof setInterval> | null = null
+  // 保存所有 setTimeout ID，组件销毁时统一清理
+  const timeoutIds: ReturnType<typeof setTimeout>[] = []
 
   const gd = ref(getGameData(route.params.gameId as string))
   const eng = computed(() => gd.value.engine)
@@ -87,8 +89,8 @@ export function useGameEngine() {
 
   function showFB(t: 'correct' | 'wrong') {
     fb.value = t
-    if (t === 'correct' && combo.value >= 3) { comboEffect.value = true; setTimeout(() => { comboEffect.value = false }, 1000) }
-    setTimeout(() => { fb.value = '' }, 800)
+    if (t === 'correct' && combo.value >= 3) { comboEffect.value = true; timeoutIds.push(setTimeout(() => { comboEffect.value = false }, 1000)) }
+    timeoutIds.push(setTimeout(() => { fb.value = '' }, 800))
   }
 
   function startGame() {
@@ -107,7 +109,7 @@ export function useGameEngine() {
     if (showRes.value) return; lastSel.value = opt; showRes.value = true
     if (opt === cur.value.answer) { score.value += 10 + combo.value * 2; combo.value++; maxCombo.value = Math.max(maxCombo.value, combo.value); correctCount.value++; showFB('correct') }
     else { combo.value = 0; wrongCount.value++; showFB('wrong') }
-    setTimeout(() => { showRes.value = false; lastSel.value = ''; qIdx.value++; if (qIdx.value >= allData.value.length) endGame() }, 1000)
+    timeoutIds.push(setTimeout(() => { showRes.value = false; lastSel.value = ''; qIdx.value++; if (qIdx.value >= allData.value.length) endGame() }, 1000))
   }
 
   function onFill() {
@@ -132,7 +134,7 @@ export function useGameEngine() {
   function checkPoetry() {
     const p = allData.value[qIdx.value]; let ok = true; p.blanks.forEach((b: any, i: number) => { if (filledBlanks.value[blankPos.value[i]] !== b.text) ok = false })
     if (ok) { score.value += 30 + combo.value * 5; combo.value++; maxCombo.value = Math.max(maxCombo.value, combo.value); correctCount.value++; showFB('correct') } else { combo.value = 0; wrongCount.value++; showFB('wrong') }
-    setTimeout(() => { qIdx.value++; if (qIdx.value >= allData.value.length) endGame(); else setupPoetry() }, 1200)
+    timeoutIds.push(setTimeout(() => { qIdx.value++; if (qIdx.value >= allData.value.length) endGame(); else setupPoetry() }, 1200))
   }
 
   // ===== 翻牌记忆游戏 =====
@@ -167,7 +169,7 @@ export function useGameEngine() {
 
       if (cardA.pairId === cardB.pairId) {
         // 配对成功
-        setTimeout(() => {
+        timeoutIds.push(setTimeout(() => {
           cardA.matched = true
           cardB.matched = true
           matchedPairs.value++
@@ -182,20 +184,20 @@ export function useGameEngine() {
             // 额外奖励：步数越少分越多
             const bonus = Math.max(0, (18 - flipMoves.value) * 5)
             score.value += bonus
-            setTimeout(() => endGame(), 800)
+            timeoutIds.push(setTimeout(() => endGame(), 800))
           }
-        }, 500)
+        }, 500))
       } else {
         // 配对失败
         combo.value = 0
         wrongCount.value++
         showFB('wrong')
-        setTimeout(() => {
+        timeoutIds.push(setTimeout(() => {
           cardA.flipped = false
           cardB.flipped = false
           flippedIdx.value = []
           flipLocked.value = false
-        }, 800)
+        }, 800))
       }
     }
   }
@@ -271,7 +273,11 @@ export function useGameEngine() {
     router.replace(`/games/${subjectType.value}/${gameId.value}/result?score=${score.value}&correct=${correctCount.value}&wrong=${wrongCount.value}&combo=${maxCombo.value}`)
   }
 
-  function destroy() { if (timer) clearInterval(timer) }
+  function destroy() {
+    if (timer) clearInterval(timer)
+    timeoutIds.forEach(id => clearTimeout(id))
+    timeoutIds.length = 0
+  }
 
   return {
     gameConfig, subjectColor, diffText, started, score, combo, maxCombo, correctCount, wrongCount, remainingTime, timerActive, qIdx, totalQ, fb, showRes, lastSel, fillVal, comboEffect,

@@ -158,9 +158,9 @@ const timerActive = ref(false)
 const remainingTime = ref(0)
 const startTime = ref(0)
 const totalTime = ref(0)
-let timer: any = null
+let timer: ReturnType<typeof setInterval> | null = null
 
-const currentQ = computed(() => questions.value[qIdx.value] || {} as MathQuestion)
+const currentQ = computed(() => questions.value[qIdx.value] ?? { content: '', answer: '', type: '', unit: 0 } as MathQuestion)
 const accuracy = computed(() => {
   const t = correctCount.value + wrongCount.value
   return t === 0 ? 0 : Math.round((correctCount.value / t) * 100)

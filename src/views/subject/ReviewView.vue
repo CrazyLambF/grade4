@@ -156,14 +156,14 @@ import { useRoute } from 'vue-router'
 import { useSubjectStore } from '@/stores/subject'
 import { usePracticeStore } from '@/stores/practice'
 import { useMistakesStore } from '@/stores/mistakes'
-import type { Question } from '@/types'
+import type { Question, SubjectType } from '@/types'
 
 const route = useRoute()
 const store = useSubjectStore()
 const practiceStore = usePracticeStore()
 const mistakesStore = useMistakesStore()
 
-const subjectType = computed(() => route.params.subject as any)
+const subjectType = computed(() => route.params.subject as SubjectType)
 const unitId = computed(() => Number(route.params.unit))
 const lessonId = computed(() => Number(route.params.lesson))
 
@@ -225,7 +225,7 @@ function getOptionClass(qId: string, opt: string, correct: string | string[]): R
 
 function selectAnswer(q: Question, selected: string) {
   if (showAnswer.value[q.id]) return // 已答题不可重选
-  const correctAnswer = Array.isArray(q.answer) ? q.answer[0] : q.answer
+  const correctAnswer = Array.isArray(q.answer) ? (q.answer[0] ?? '') : q.answer
   const isCorrect = selected === correctAnswer
   answers.value[q.id] = selected
   showAnswer.value[q.id] = isCorrect ? 'correct' : 'wrong'
@@ -241,7 +241,7 @@ function selectAnswer(q: Question, selected: string) {
       retryCount: 0,
       mastered: false,
       question: q,
-    })
+    }).catch(() => console.error('错题记录失败:', q.id))
   }
 
   checkAllDone()
@@ -274,7 +274,7 @@ function checkFill(q: Question) {
       retryCount: 0,
       mastered: false,
       question: q,
-    })
+    }).catch(() => console.error('错题记录失败:', q.id))
   }
 
   checkAllDone()

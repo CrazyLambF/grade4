@@ -216,7 +216,11 @@ async function onFileSelected(e: Event) {
   if (!file) return
   try {
     const text = await file.text()
-    await importAllData(text)
+    const result = await importAllData(text)
+    if (!result.success) {
+      showToast(result.message)
+      return
+    }
     showToast('数据恢复成功')
     await userStore.loadUser()
   } catch {

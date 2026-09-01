@@ -86,7 +86,7 @@ const answeredCount = computed(() => Object.keys(userAnswers.value).length)
 
 const totalTime = 60 * 60
 const remainingTime = ref(totalTime)
-let timer: any = null
+let timer: ReturnType<typeof setInterval> | null = null
 
 function formatTime(s: number) {
   const m = Math.floor(s / 60)
@@ -109,13 +109,17 @@ async function submit() {
   let correctCount = 0
   for (const q of questions.value) {
     const userAns = userAnswers.value[q.id]
-    const correctAns = Array.isArray(q.answer) ? q.answer[0] : q.answer
+    const correctAns = Array.isArray(q.answer) ? (q.answer[0] ?? '') : q.answer
     if (userAns === correctAns) { correctCount++ }
     else {
-      await mistakesStore.addMistakeRecord({
-        questionId: q.id, subject: q.subject, userAnswer: userAns || '未作答',
-        source: 'monthly', createTime: new Date().toISOString(), retryCount: 0, mastered: false, question: q,
-      })
+      try {
+        await mistakesStore.addMistakeRecord({
+          questionId: q.id, subject: q.subject, userAnswer: userAns || '未作答',
+          source: 'monthly', createTime: new Date().toISOString(), retryCount: 0, mastered: false, question: q,
+        })
+      } catch {
+        console.error('错题记录失败:', q.id)
+      }
     }
   }
   const score = Math.round((correctCount / questions.value.length) * 100)
@@ -125,7 +129,7 @@ async function submit() {
     duration: totalTime - remainingTime.value, createTime: new Date().toISOString(),
     answers: questions.value.map(q => ({
       questionId: q.id, userAnswer: userAnswers.value[q.id] || '',
-      correct: (Array.isArray(q.answer) ? q.answer[0] : q.answer) === userAnswers.value[q.id],
+      correct: (Array.isArray(q.answer) ? (q.answer[0] ?? '') : q.answer) === userAnswers.value[q.id],
     })),
   })
   if (timer) clearInterval(timer)

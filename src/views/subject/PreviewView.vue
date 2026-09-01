@@ -133,13 +133,14 @@ import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useSubjectStore } from '@/stores/subject'
 import { usePracticeStore } from '@/stores/practice'
+import type { SubjectType } from '@/types'
 
 const route = useRoute()
 const router = useRouter()
 const store = useSubjectStore()
 const practiceStore = usePracticeStore()
 
-const subjectType = computed(() => route.params.subject as any)
+const subjectType = computed(() => route.params.subject as SubjectType)
 const unitId = computed(() => Number(route.params.unit))
 const lessonId = computed(() => Number(route.params.lesson))
 

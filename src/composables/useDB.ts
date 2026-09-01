@@ -69,7 +69,8 @@ export async function getMistakesBySubject(subject: string): Promise<MistakeReco
 }
 
 export async function getAllMistakes(): Promise<MistakeRecord[]> {
-  return await db.mistakes.where('mastered').equals(0 as any).toArray()
+  // Dexie 的 where().equals() 不支持 boolean false，用 .and() 过滤
+  return await db.mistakes.filter(m => !m.mastered).toArray()
 }
 
 export async function markMistakeMastered(id: number): Promise<void> {
@@ -122,18 +123,39 @@ export async function exportAllData(): Promise<string> {
   return JSON.stringify(data, null, 2)
 }
 
-export async function importAllData(jsonStr: string): Promise<void> {
-  const data = JSON.parse(jsonStr)
+// 验证导入数据结构：每个字段必须是数组
+function validateImportData(data: unknown): data is Record<string, unknown[]> {
+  if (!data || typeof data !== 'object') return false
+  const obj = data as Record<string, unknown>
+  const requiredKeys = ['studyRecords', 'mistakes', 'practices', 'gameRecords', 'userInfo']
+  for (const key of requiredKeys) {
+    if (key in obj && !Array.isArray(obj[key])) return false
+  }
+  return true
+}
+
+export async function importAllData(jsonStr: string): Promise<{ success: boolean; message: string }> {
+  let data: unknown
+  try {
+    data = JSON.parse(jsonStr)
+  } catch {
+    return { success: false, message: 'JSON 格式无效，无法解析' }
+  }
+  if (!validateImportData(data)) {
+    return { success: false, message: '数据结构不正确，缺少必要字段' }
+  }
+  const d = data as { studyRecords?: unknown[]; mistakes?: unknown[]; practices?: unknown[]; gameRecords?: unknown[]; userInfo?: unknown[] }
   await db.transaction('rw', db.studyRecords, db.mistakes, db.practices, db.gameRecords, db.userInfo, async () => {
     await db.studyRecords.clear()
     await db.mistakes.clear()
     await db.practices.clear()
     await db.gameRecords.clear()
     await db.userInfo.clear()
-    if (data.studyRecords) await db.studyRecords.bulkAdd(data.studyRecords)
-    if (data.mistakes) await db.mistakes.bulkAdd(data.mistakes)
-    if (data.practices) await db.practices.bulkAdd(data.practices)
-    if (data.gameRecords) await db.gameRecords.bulkAdd(data.gameRecords)
-    if (data.userInfo) await db.userInfo.bulkAdd(data.userInfo)
+    if (d.studyRecords) await db.studyRecords.bulkAdd(d.studyRecords as StudyRecord[])
+    if (d.mistakes) await db.mistakes.bulkAdd(d.mistakes as MistakeRecord[])
+    if (d.practices) await db.practices.bulkAdd(d.practices as PracticeRecord[])
+    if (d.gameRecords) await db.gameRecords.bulkAdd(d.gameRecords as GameRecord[])
+    if (d.userInfo) await db.userInfo.bulkAdd(d.userInfo as UserInfo[])
   })
+  return { success: true, message: '数据导入成功' }
 }

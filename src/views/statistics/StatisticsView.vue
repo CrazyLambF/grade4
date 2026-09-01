@@ -119,9 +119,9 @@ const suggestions = computed(() => {
   const list: string[] = []
   const entries = Object.entries(subjectScores.value)
   const weakest = entries.reduce((min, cur) => cur[1] < min[1] ? cur : min)
-  if (weakest[1] < 60) list.push(`${subjectName(weakest[0] as any)}掌握度较低(${weakest[1]}%)，建议多做练习`)
+  if (weakest[1] < 60) list.push(`${subjectName(weakest[0])}掌握度较低(${weakest[1]}%)，建议多做练习`)
   const strongest = entries.reduce((max, cur) => cur[1] > max[1] ? cur : max)
-  if (strongest[1] >= 80) list.push(`${subjectName(strongest[0] as any)}掌握度很高(${strongest[1]}%)，继续保持！`)
+  if (strongest[1] >= 80) list.push(`${subjectName(strongest[0])}掌握度很高(${strongest[1]}%)，继续保持！`)
   if (todayDuration.value < 15) list.push('今日学习时长不足15分钟，加油哦！')
   if (todayDuration.value >= 30) list.push('今日学习已超30分钟，记得适当休息，可以玩个放松游戏！')
   return list.length > 0 ? list : ['继续坚持学习，你会越来越棒！']
