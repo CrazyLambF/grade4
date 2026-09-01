@@ -24,7 +24,7 @@ export const gameConfigs: GameConfig[] = [
   { id: 'sound-connect', subject: 'science', name: '声音传播连线', icon: 'link-o', description: '声音特性与因素配对', difficulty: 2, estimatedTime: 120 },
   { id: 'food-sort', subject: 'science', name: '食物营养分类', icon: 'gift-o', description: '食物拖入营养类别框', difficulty: 1, estimatedTime: 120 },
   { id: 'organ-puzzle', subject: 'science', name: '器官拼图', icon: 'cluster-o', description: '拼装人体器官并了解功能', difficulty: 3, estimatedTime: 180 },
-  { id: 'force-lab', subject: 'science', name: '力的实验台', icon: 'aim', description: '模拟弹簧测力计实验', difficulty: 3, estimatedTime: 180 },
+  { id: 'air-lab', subject: 'science', name: '空气实验台', icon: 'aim', description: '空气性质趣味问答', difficulty: 3, estimatedTime: 180 },
 ]
 
 export const useGamesStore = defineStore('games', () => {

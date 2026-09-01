@@ -2,7 +2,7 @@ import {
   poetryFillData, chineseQAData, idiomChainData, wordMatchData,
   mathMinuteData, angleChallengeData, formulaClearData, shapeSortData,
   wordClearData, listenPickData, sentenceOrderData, rhymeMasterData,
-  soundConnectData, foodSortData, organPuzzleData, forceLabData,
+  soundConnectData, foodSortData, organPuzzleData, airLabData,
 } from '@/data/games'
 
 function shuffle<T>(arr: T[]): T[] { return [...arr].sort(() => Math.random() - 0.5) }
@@ -16,7 +16,7 @@ export function getGameData(gameId: string): { engine: string; data: any[]; sort
     case 'angle-challenge': return { engine: 'qa-choice', data: shuffle(angleChallengeData).map(d => ({ q: `${d.angle}°是什么角？`, options: ['锐角', '直角', '钝角', '平角', '周角'], answer: d.type })) }
     case 'formula-clear': return { engine: 'qa-choice', data: shuffle(formulaClearData) }
     case 'idiom-chain': return { engine: 'qa-choice', data: shuffle(idiomChainData).map(d => ({ q: `"${d.current}"接哪个成语？`, options: d.options, answer: d.answer })) }
-    case 'force-lab': return { engine: 'qa-choice', data: shuffle(forceLabData) }
+    case 'air-lab': return { engine: 'qa-choice', data: shuffle(airLabData) }
     case 'poetry-fill': return { engine: 'poetry', data: shuffle(poetryFillData) }
     case 'word-match': return { engine: 'match', data: wordMatchData.map(d => ({ left: d.left, right: d.right })) }
     case 'word-clear': return { engine: 'match', data: wordClearData.map(d => ({ left: d.left, right: d.right })) }
