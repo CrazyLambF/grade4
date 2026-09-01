@@ -55,6 +55,7 @@ export interface PreviewContent {
   audioUrl?: string // 音频地址
   concepts?: ConceptItem[] // 核心概念（数学/科学）
   words?: EnglishWord[] // 单词（英语）
+  thinkQuestion?: string // 预习思考引导问题
 }
 
 // 生字
