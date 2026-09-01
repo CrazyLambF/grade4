@@ -150,7 +150,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { showConfirmDialog, showToast } from 'vant'
 import { useUserStore } from '@/stores/user'
 import { useSubjectStore } from '@/stores/subject'
@@ -173,6 +173,13 @@ const showAbout = ref(false)
 const showGuide = ref(false)
 const fileInput = ref<HTMLInputElement | null>(null)
 
+// 每次打开进度设置弹窗时，同步当前实际进度到 tempProgress
+watch(showProgressSetting, (show) => {
+  if (show && userInfo.value) {
+    tempProgress.value = { ...userInfo.value.currentUnit }
+  }
+})
+
 function currentUnit(type: SubjectType) { return userInfo.value?.currentUnit[type] || 1 }
 function getProgress(type: SubjectType) {
   const total = subjectStore.getSubject(type).units.length
@@ -186,10 +193,13 @@ function saveName() {
   }
 }
 
-function saveProgress() {
+async function saveProgress() {
+  // 构建完整的进度对象，一次性批量更新（避免逐个 async 调用产生竞态条件）
+  const progress = {} as Record<SubjectType, number>
   Object.entries(tempProgress.value).forEach(([k, v]) => {
-    userStore.updateUnitProgress(k as SubjectType, v)
+    progress[k as SubjectType] = v
   })
+  await userStore.updateMultipleUnitProgress(progress)
   showProgressSetting.value = false
   showToast('进度已更新')
 }

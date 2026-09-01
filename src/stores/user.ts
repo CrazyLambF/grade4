@@ -49,6 +49,18 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
+  // 批量更新多个学科进度（避免并发调用 updateUnitProgress 时的竞态条件）
+  async function updateMultipleUnitProgress(progress: Record<SubjectType, number>) {
+    if (userInfo.value) {
+      const plain = toPlain(userInfo.value)
+      Object.entries(progress).forEach(([k, v]) => {
+        plain.currentUnit[k as SubjectType] = v
+      })
+      await saveUserInfo(plain)
+      userInfo.value = plain
+    }
+  }
+
   async function checkStreak() {
     if (!userInfo.value) return
     const today = new Date().toISOString().split('T')[0]
@@ -66,5 +78,5 @@ export const useUserStore = defineStore('user', () => {
     userInfo.value = plain
   }
 
-  return { userInfo, isLoggedIn, loadUser, updateUser, updateUnitProgress, checkStreak }
+  return { userInfo, isLoggedIn, loadUser, updateUser, updateUnitProgress, updateMultipleUnitProgress, checkStreak }
 })
