@@ -59,7 +59,7 @@
 
       <!-- 成就提示 -->
       <transition-group name="ach-slide" tag="div" class="achievement-list" v-if="achievements.length">
-        <div v-for="(ach, i) in achievements" :key="ach" class="achievement-card card" :style="{ animationDelay: (i * 0.1) + 's' }">
+        <div v-for="(ach, i) in achievements" :key="ach.title" class="achievement-card card" :style="{ animationDelay: (i * 0.1) + 's' }">
           <div class="ach-icon-wrap">
             <van-icon name="medal-o" size="28" color="#FAAD14" />
           </div>

@@ -168,6 +168,7 @@ export interface GameScore {
 
 // 用户信息
 export interface UserInfo {
+  id?: number
   name: string
   school?: string
   grade: string
