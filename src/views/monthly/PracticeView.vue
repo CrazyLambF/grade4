@@ -155,7 +155,30 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
 .q-type { font-size: 12px; color: $color-text-secondary; margin-left: auto; }
 .q-content { font-size: 16px; color: $color-text-primary; line-height: 1.8; margin-bottom: 16px; }
 .q-options { display: flex; flex-direction: column; gap: 8px; }
-.q-option { display: flex; gap: 8px; align-items: center; padding: 12px; border-radius: 8px; background: $color-bg; font-size: 14px; cursor: pointer; &:active { opacity: 0.7; } &.selected { background: #F0EBFF; border: 1px solid #7B61FF; } }
+.q-option { 
+  display: flex; 
+  gap: 8px; 
+  align-items: center; 
+  padding: 12px; 
+  border-radius: 8px; 
+  background: $color-bg; 
+  font-size: 14px; 
+  cursor: pointer; 
+  transition: all $duration-base $easing-bounce;
+  border: 2px solid transparent;
+  
+  &:active { 
+    transform: scale(0.95);
+    background-color: darken($color-bg, 5%);
+    border-color: #7B61FF;
+    box-shadow: $shadow-sm;
+  } 
+  &.selected { 
+    background: #F0EBFF; 
+    border: 2px solid #7B61FF;
+    animation: pulse 0.3s $easing-bounce;
+  } 
+}
 .opt-label { width: 24px; height: 24px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0; }
 .q-option.selected .opt-label { background: #7B61FF; color: #fff; }
 .nav-buttons { display: flex; justify-content: space-between; padding: 16px; gap: 12px; }

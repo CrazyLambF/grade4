@@ -233,6 +233,14 @@ onMounted(() => {
   width: 20px; height: 20px; border-radius: 50%; color: #fff;
   font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center;
   flex-shrink: 0; margin-top: 1px;
+  transition: all $duration-base $easing-bounce;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  
+  &:active {
+    animation: bounceScale 0.4s $easing-bounce;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
 }
 
 .word-list { display: flex; flex-direction: column; gap: 12px; }
@@ -241,6 +249,16 @@ onMounted(() => {
   font-size: 24px; font-weight: 700; color: $color-text-primary;
   width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
   text-align: center; border: 2px solid; border-radius: 10px; flex-shrink: 0;
+  transition: all $duration-base $easing-bounce;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  
+  &:active {
+    animation: shake 0.4s ease-in-out;
+    transform: scale(1.1);
+    box-shadow: $shadow-md;
+    background-color: rgba(108, 92, 231, 0.05);
+  }
 }
 .word-detail { flex: 1; }
 .word-top { display: flex; align-items: center; gap: 8px; }
@@ -250,21 +268,59 @@ onMounted(() => {
 .word-phrases { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
 
 .concept-list { display: flex; flex-direction: column; gap: 12px; }
-.concept-item { padding-left: 10px; border-left: 3px solid #ddd; }
+.concept-item { 
+  padding-left: 10px; 
+  border-left: 3px solid #ddd;
+  transition: all $duration-base $easing-smooth;
+  cursor: pointer;
+  border-radius: $radius-sm;
+  padding: $spacing-sm $spacing-sm $spacing-sm 10px;
+  -webkit-tap-highlight-color: transparent;
+  
+  &:active {
+    transform: scale(0.98) rotate(-1deg);
+    box-shadow: $shadow-md;
+    background-color: rgba(108, 92, 231, 0.03);
+    border-left-width: 4px;
+  }
+}
 .concept-title { font-size: 15px; font-weight: 600; color: $color-text-primary; margin-bottom: 4px; }
 .concept-desc { font-size: 14px; color: $color-text-regular; line-height: 1.6; }
 .concept-example { display: flex; align-items: center; gap: 4px; margin-top: 6px; font-size: 13px; color: $color-text-secondary; background: $color-bg; padding: 6px 8px; border-radius: 6px; }
 
 .en-word-list { display: flex; flex-direction: column; gap: 10px; }
-.en-word-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid $color-border; }
-.en-word-item:last-child { border-bottom: none; }
 .en-word-left { display: flex; flex-direction: column; gap: 2px; }
 .en-word-row { display: flex; align-items: center; gap: 6px; }
 .en-word { font-size: 16px; font-weight: 600; color: $color-text-primary; }
-.speak-btn { cursor: pointer; transition: transform 0.15s; }
-.speak-btn:active { transform: scale(1.3); }
+.speak-btn { 
+  cursor: pointer; 
+  transition: all $duration-fast $easing-bounce;
+  border-radius: 50%;
+  padding: 4px;
+  -webkit-tap-highlight-color: transparent;
+  
+  &:active {
+    transform: scale(1.3) rotate(15deg);
+    color: $color-primary-dark;
+    box-shadow: 0 2px 10px rgba(108, 92, 231, 0.35);
+    background-color: rgba(108, 92, 231, 0.12);
+  }
+}
 .en-phonetic { font-size: 12px; color: $color-text-secondary; }
 .en-meaning { font-size: 14px; color: $color-text-regular; }
+
+.en-word-item {
+  display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid $color-border;
+  transition: all $duration-base $easing-smooth;
+  -webkit-tap-highlight-color: transparent;
+  border-radius: $radius-sm;
+
+  &:active {
+    background-color: rgba(108, 92, 231, 0.04);
+    transform: scale(0.98);
+  }
+}
+.en-word-item:last-child { border-bottom: none; }
 
 .complete-tip {
   display: flex; align-items: center; gap: 6px; justify-content: center;
@@ -273,5 +329,38 @@ onMounted(() => {
 }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-.action-bar { padding: 8px 16px 16px; }
+.action-bar { 
+  padding: 8px 16px 16px;
+  
+  .van-button {
+    transition: all $duration-base $easing-bounce;
+    box-shadow: $shadow-md;
+    -webkit-tap-highlight-color: transparent;
+    
+    &:active {
+      transform: scale(0.92);
+      box-shadow: $shadow-lg;
+      filter: brightness(0.95);
+    }
+  }
+}
+
+// ============================================
+// 关键帧动画
+// ============================================
+@keyframes bounceScale {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.35); }
+  60% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+@keyframes shake {
+  0% { transform: scale(1.1) rotate(0deg); }
+  20% { transform: scale(1.1) rotate(-6deg); }
+  40% { transform: scale(1.1) rotate(6deg); }
+  60% { transform: scale(1.1) rotate(-4deg); }
+  80% { transform: scale(1.1) rotate(4deg); }
+  100% { transform: scale(1.1) rotate(0deg); }
+}
 </style>

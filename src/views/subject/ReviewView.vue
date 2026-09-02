@@ -312,7 +312,25 @@ function retryAll() {
 .card-title { font-size: 16px; font-weight: 600; color: $color-text-primary; }
 
 .knowledge-tree { display: flex; flex-direction: column; gap: 16px; }
-.node-header { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+.node-header { 
+  display: flex; 
+  align-items: center; 
+  gap: 6px; 
+  cursor: pointer;
+  padding: $spacing-xs;
+  border-radius: $radius-sm;
+  transition: all $duration-fast $easing-smooth;
+  -webkit-tap-highlight-color: transparent;
+  
+  &:active {
+    background-color: rgba(108, 92, 231, 0.06);
+    transform: scale(0.97);
+  }
+  
+  .van-icon {
+    transition: transform $duration-base $easing-smooth;
+  }
+}
 .dot { width: 6px; height: 6px; border-radius: 50%; }
 .node-title { font-size: 15px; font-weight: 600; color: $color-text-primary; }
 .node-content { font-size: 13px; color: $color-text-regular; margin: 4px 0 8px 18px; line-height: 1.6; }
@@ -322,16 +340,59 @@ function retryAll() {
 .child-title { font-size: 13px; font-weight: 500; color: $color-text-primary; }
 .child-content { font-size: 12px; color: $color-text-secondary; }
 
-.collapse-enter-active, .collapse-leave-active { transition: all 0.25s ease; overflow: hidden; }
-.collapse-enter-from, .collapse-leave-to { opacity: 0; max-height: 0; }
-.collapse-enter-to, .collapse-leave-from { opacity: 1; max-height: 300px; }
+.collapse-enter-active, .collapse-leave-active { 
+  transition: all $duration-slow $easing-smooth; 
+  overflow: hidden; 
+}
+.collapse-enter-from, .collapse-leave-to { 
+  opacity: 0; 
+  max-height: 0; 
+  transform: translateY(-10px);
+}
+.collapse-enter-to, .collapse-leave-from { 
+  opacity: 1; 
+  max-height: 300px; 
+  transform: translateY(0);
+}
 
 .key-points { display: flex; flex-direction: column; gap: 8px; }
 .point-item { display: flex; gap: 8px; align-items: center; font-size: 14px; color: $color-text-regular; }
 
 .mistake-list { display: flex; flex-direction: column; gap: 8px; }
-.mistake-item { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; color: $color-text-regular; }
-.mistake-num { width: 18px; height: 18px; border-radius: 50%; background: #FFEBEE; color: #FF4D4F; font-size: 11px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.mistake-item { 
+  display: flex; 
+  gap: 8px; 
+  align-items: flex-start; 
+  font-size: 13px; 
+  color: $color-text-regular;
+  padding: $spacing-xs;
+  border-radius: $radius-sm;
+  transition: all $duration-fast $easing-smooth;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  
+  &:active {
+    background-color: rgba(255, 77, 79, 0.06);
+    transform: scale(0.97);
+  }
+}
+.mistake-num { 
+  width: 18px; 
+  height: 18px; 
+  border-radius: 50%; 
+  background: #FFEBEE; 
+  color: #FF4D4F; 
+  font-size: 11px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  flex-shrink: 0;
+  transition: all $duration-fast $easing-bounce;
+  
+  .mistake-item:active & {
+    animation: bounceScale 0.3s $easing-bounce;
+  }
+}
 
 .quiz-stats { margin-bottom: 14px; }
 .stats-bar { display: flex; height: 6px; border-radius: 3px; background: $color-bg; overflow: hidden; }
@@ -353,13 +414,37 @@ function retryAll() {
 .q-option {
   display: flex; align-items: center; gap: 8px;
   padding: 8px 12px; border-radius: 8px; background: $color-bg;
-  font-size: 14px; cursor: pointer; transition: all 0.2s;
+  font-size: 14px; cursor: pointer; transition: all $duration-base $easing-bounce;
   border: 2px solid transparent;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  
+  &:active:not(.disabled) {
+    transform: scale(0.94);
+    background-color: darken($color-bg, 5%);
+    border-color: $color-primary-light;
+    box-shadow: $shadow-sm;
+  }
+  
+  &.disabled { 
+    cursor: default; 
+    pointer-events: none; 
+  }
+  
+  &.correct { 
+    background: #E8F5E9; 
+    color: #2E7D32; 
+    border-color: #52C41A;
+    animation: flashSuccess 0.6s ease-out;
+  }
+  
+  &.wrong { 
+    background: #FFEBEE; 
+    color: #C62828; 
+    border-color: #FF4D4F;
+    animation: shake 0.4s ease-in-out, flashError 0.6s ease-out;
+  }
 }
-.q-option:active { opacity: 0.7; }
-.q-option.disabled { cursor: default; pointer-events: none; }
-.q-option.correct { background: #E8F5E9; color: #2E7D32; border-color: #52C41A; }
-.q-option.wrong { background: #FFEBEE; color: #C62828; border-color: #FF4D4F; }
 .judge-opt { justify-content: center; font-size: 15px; }
 .opt-letter {
   width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid currentColor;
@@ -368,22 +453,124 @@ function retryAll() {
 }
 
 .q-fill { margin-top: 4px; }
-.q-analysis { display: flex; gap: 6px; margin-top: 8px; padding: 10px; border-radius: 8px; }
-.q-analysis.correct { background: #F0FFF0; }
-.q-analysis.wrong { background: #FFF5F5; }
+.q-analysis { 
+  display: flex; gap: 6px; margin-top: 8px; padding: 10px; border-radius: 8px;
+  transition: all $duration-base $easing-smooth;
+}
+.q-analysis.correct { 
+  background: #F0FFF0; 
+  border-left: 3px solid #52C41A;
+  animation: slideInCorrect 0.4s $easing-bounce;
+}
+.q-analysis.wrong { 
+  background: #FFF5F5; 
+  border-left: 3px solid #FF4D4F;
+  animation: slideInWrong 0.4s $easing-bounce;
+}
 .answer-text { font-size: 13px; font-weight: 600; color: $color-text-primary; }
 .answer-detail { font-weight: 400; color: $color-text-secondary; margin-left: 4px; }
 .analysis-text { font-size: 12px; color: $color-text-secondary; margin-top: 2px; line-height: 1.5; }
 
-.retry-bar { display: flex; justify-content: center; margin-top: 14px; }
+.retry-bar { 
+  display: flex; 
+  justify-content: center; 
+  margin-top: 14px;
+  
+  .van-button {
+    transition: all $duration-base $easing-bounce;
+    
+    &:active {
+      animation: spinPress 0.6s $easing-bounce;
+      box-shadow: $shadow-md;
+    }
+  }
+}
 
 .bottom-tip {
   display: flex; align-items: center; gap: 6px; justify-content: center;
   padding: 16px 0; font-size: 14px; font-weight: 600; color: $color-text-primary;
-  animation: fadeIn 0.4s ease;
+  animation: celebrateBounce 0.8s $easing-bounce, fadeIn 0.4s ease;
+
+  .van-icon {
+    animation: heartbeat 1.5s ease-in-out infinite;
+  }
 }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
 .fade-enter-active, .fade-leave-active { transition: opacity 0.25s ease; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
+
+// ============================================
+// 关键帧动画
+// ============================================
+
+// 正确答案闪烁
+@keyframes flashSuccess {
+  0% { background: $color-bg; }
+  30% { background: #C8E6C9; transform: scale(1.02); }
+  100% { background: #E8F5E9; }
+}
+
+// 错误答案闪烁
+@keyframes flashError {
+  0% { background: $color-bg; }
+  30% { background: #FFCDD2; transform: scale(1.02); }
+  100% { background: #FFEBEE; }
+}
+
+// 抖动效果（错误选项）
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  15% { transform: translateX(-6px); }
+  30% { transform: translateX(6px); }
+  45% { transform: translateX(-4px); }
+  60% { transform: translateX(4px); }
+  75% { transform: translateX(-2px); }
+  90% { transform: translateX(2px); }
+}
+
+// 弹跳缩放（易错点序号）
+@keyframes bounceScale {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.3); }
+  70% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+// 重做按钮旋转按压
+@keyframes spinPress {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(0.9) rotate(180deg); }
+  100% { transform: scale(1) rotate(360deg); }
+}
+
+// 正确解析滑入
+@keyframes slideInCorrect {
+  0% { opacity: 0; transform: translateY(-8px) scale(0.95); }
+  60% { transform: translateY(2px) scale(1.02); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+// 错误解析滑入（带微抖）
+@keyframes slideInWrong {
+  0% { opacity: 0; transform: translateY(-8px) scale(0.95); }
+  30% { transform: translateY(0) scale(1) rotate(-1deg); }
+  50% { transform: rotate(1deg); }
+  70% { transform: rotate(-0.5deg); }
+  100% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+}
+
+// 庆祝弹跳
+@keyframes celebrateBounce {
+  0%, 100% { transform: translateY(0); }
+  25% { transform: translateY(-6px) scale(1.05); }
+  50% { transform: translateY(0) scale(1); }
+  75% { transform: translateY(-3px) scale(1.02); }
+}
+
+// 心跳（完成图标）
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
 </style>

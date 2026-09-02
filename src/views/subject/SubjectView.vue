@@ -217,11 +217,14 @@ function goGame(gameId: string) {
   padding: $spacing-md;
   border-radius: $radius-md;
   background: $color-bg;
-  transition: all $duration-base $easing-smooth;
+  transition: all $duration-base $easing-bounce;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 
   &:active {
-    transform: scale(0.97);
-    background: darken($color-bg, 2%);
+    transform: scale(0.96) translateY(1px);
+    background: darken($color-bg, 3%);
+    box-shadow: $shadow-sm;
   }
 }
 
@@ -248,19 +251,51 @@ function goGame(gameId: string) {
   border-radius: $radius-pill;
   font-weight: $font-weight-semibold;
   transition: all $duration-base $easing-bounce;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  // 按压涟漪层
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
 
   &--preview {
     background: transparent;
     border: 2px solid;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 
-    &:active { transform: scale(0.9); }
+    &::after { background: currentColor; }
+
+    &:active {
+      transform: scale(0.82) rotate(-3deg);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+      filter: brightness(0.95);
+    }
+    &:active::after { opacity: 0.1; }
   }
 
   &--review {
     color: #fff;
     border: 2px solid transparent;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
 
-    &:active { transform: scale(0.9); }
+    &::after { background: rgba(255, 255, 255, 0.25); }
+
+    &:active {
+      transform: scale(0.82) rotate(3deg);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+      filter: brightness(0.88);
+    }
+    &:active::after { opacity: 1; }
   }
 }
 
@@ -274,11 +309,17 @@ function goGame(gameId: string) {
   align-items: center;
   gap: $spacing-md;
   cursor: pointer;
-  transition: all $duration-base $easing-smooth;
+  transition: all $duration-base $easing-bounce;
+  -webkit-tap-highlight-color: transparent;
 
   &:active {
-    transform: scale(0.97);
-    box-shadow: $shadow-sm;
+    transform: scale(0.96) translateY(1px);
+    box-shadow: $shadow-md;
+    background-color: darken($color-card, 2%);
+  }
+
+  &:active .game-icon {
+    transform: rotate(-8deg) scale(1.05);
   }
 }
 
@@ -290,6 +331,7 @@ function goGame(gameId: string) {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  transition: transform $duration-base $easing-bounce;
 }
 
 .game-info { flex: 1; }
@@ -308,7 +350,10 @@ function goGame(gameId: string) {
   font-size: 18px;
   color: $color-text-placeholder;
   font-weight: $font-weight-bold;
-  transition: transform $duration-base;
+  transition: all $duration-base $easing-bounce;
 }
-.game-card:active .game-arrow { transform: translateX(4px); }
+.game-card:active .game-arrow { 
+  transform: translateX(6px);
+  color: $color-primary;
+}
 </style>

@@ -246,9 +246,20 @@ onUnmounted(() => {
 .q-option {
   display: flex; gap: 8px; align-items: center;
   padding: 12px; border-radius: 8px; background: $color-bg;
-  font-size: 14px; cursor: pointer; transition: all 0.2s;
-  &:active { opacity: 0.7; }
-  &.selected { background: #EBF3FF; border: 1px solid $color-primary; }
+  font-size: 14px; cursor: pointer; transition: all $duration-base $easing-bounce;
+  border: 2px solid transparent;
+  
+  &:active { 
+    transform: scale(0.95);
+    background-color: darken($color-bg, 5%);
+    border-color: $color-primary;
+    box-shadow: $shadow-sm;
+  }
+  &.selected { 
+    background: #EBF3FF; 
+    border: 2px solid $color-primary;
+    animation: pulse 0.3s $easing-bounce;
+  }
 }
 .opt-label {
   width: 24px; height: 24px; border-radius: 50%;

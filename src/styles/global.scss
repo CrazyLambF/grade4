@@ -223,6 +223,73 @@ img {
 .anim-heartbeat { animation: heartbeat 1.5s ease-in-out infinite; }
 
 // ============================================
+// 新增动画关键帧 — 游戏感交互反馈
+// ============================================
+
+// 弹跳按压效果（适合按钮、卡片）
+@keyframes pressBounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.92); }
+  100% { transform: scale(1); }
+}
+
+// 抖动效果（适合生字卡片、错误反馈）
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+
+// 轻微抖动（适合成功反馈）
+@keyframes wiggleLight {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+}
+
+// 弹跳放大（适合序号、图标）
+@keyframes bounceScale {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.2); }
+  60% { transform: scale(0.95); }
+  80% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+// 闪光效果（适合正确/错误反馈）
+@keyframes flashSuccess {
+  0% { box-shadow: 0 0 0 0 rgba(82, 196, 26, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(82, 196, 26, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(82, 196, 26, 0); }
+}
+
+@keyframes flashError {
+  0% { box-shadow: 0 0 0 0 rgba(255, 77, 79, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(255, 77, 79, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 77, 79, 0); }
+}
+
+// 滑入效果（适合展开内容）
+@keyframes slideDown {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+// 脉冲效果（适合强调元素）
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+// 旋转按压（适合重做按钮）
+@keyframes spinPress {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(0.9); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+// ============================================
 // Vant 主题覆盖
 // ============================================
 

@@ -127,6 +127,18 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/mood/MoodView.vue'),
     meta: { title: '心情小屋', showTabbar: false },
   },
+  {
+    path: '/test/animation',
+    name: 'AnimationTest',
+    component: () => import('@/views/test/AnimationTestView.vue'),
+    meta: { title: '动画效果测试', showTabbar: false },
+  },
+  {
+    path: '/test/showcase',
+    name: 'AnimationShowcase',
+    component: () => import('@/views/test/AnimationShowcaseView.vue'),
+    meta: { title: '动画效果展示', showTabbar: false },
+  },
 ]
 
 const router = createRouter({
